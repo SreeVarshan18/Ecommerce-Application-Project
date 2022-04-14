@@ -163,8 +163,9 @@ def Dashboard():
 
 @app.route("/viewseller")
 def viewSeller():
+    name= "muheesh"
     cursor = connection.cursor()
-    count = cursor.execute("SELECT * FROM PRODUCT")
+    count = cursor.execute("SELECT P.ID,P.CATEGORY,P.NAME,P.PRICE,P.FEATURE,P.SELLER_ID FROM PRODUCT P JOIN SELLER S ON S.ID = P.SELLER_ID WHERE P.SELLER_ID=2")
     result = cursor.fetchall()
     return render_template("viewseller.html", sellers=result)
 
