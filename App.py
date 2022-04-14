@@ -1,6 +1,161 @@
-print("dhanush")
-print("dhanush")
-print("dhanush")
-print("dhanush")
-print("dhanush")
-print("dhanush")
+from flask import Flask, request, render_template
+import sqlite3
+
+from werkzeug.utils import redirect
+
+connection = sqlite3.connect("onestop.db", check_same_thread=False)
+table1 = connection.execute("select * from sqlite_master where type = 'table' and name = 'SELLER'").fetchall()
+table2 = connection.execute("select * from sqlite_master where type = 'table' and name = 'USER'").fetchall()
+table3 = connection.execute("select * from sqlite_master where type = 'table' and name = 'PRODUCT'").fetchall()
+if table1 !=[]:
+    print("Seller table already exits")
+else:
+    connection.execute('''CREATE TABLE SELLER(
+                                ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                SELLER_NAME TEXT,
+                                SELLER_EMAIL TEXT,
+                                SELLER_PASSWORD TEXT,
+                                SELLER_NUMBER INTEGER,
+                                SELLER_ACC INTEGER,
+                                SELLER_IFSC TEXT
+);''')
+    print("Seller Table created")
+if table2!=[]:
+    print("Customer table exists")
+else:
+    connection.execute('''CREATE TABLE USER(
+                                ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                CUST_NAME TEXT,
+                                CUST_EMAIL TEXT,
+                                CUST_GENDER INTEGER,
+                                CUST_AGE INTEGER,
+                                CUST_NUMBER INTEGER,
+                                CUST_ADDRESS TEXT,
+                                CUST_PASSWORD TEXT
+                                );''')
+    print("Customer Table created ")
+if table3!=[]:
+    print("Product table exists")
+else:
+    connection.execute('''CREATE TABLE PRODUCT(
+                                ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                CATEGORY TEXT,
+                                NAME TEXT,
+                                PRICE INTEGER,
+                                FEATURE TEXT,
+                                SELLER_ID INTEGER); ''')
+    print("Product table created")
+app = Flask(__name__)
+
+@app.route("/",methods=["GET","POST"])
+def User_register():
+    if request.method == "POST":
+        getName = request.form["name"]
+        getEmail = request.form["email"]
+        getGender = request.form["gen"]
+        getAge = request.form["age"]
+        getNumber = request.form["pno"]
+        getAddress = request.form["add"]
+        getPass = request.form["pass"]
+        connection.execute("INSERT INTO USER(CUST_NAME,CUST_EMAIL,CUST_GENDER,CUST_AGE,CUST_NUMBER,CUST_ADDRESS,CUST_PASSWORD)\
+                            VALUES('"+getName+"','"+getEmail+"','"+getGender+"',"+getAge+","+getNumber+",\
+                            '"+getAddress+"','"+getPass+"')")
+        connection.commit()
+        print("Customer details inserted successfully")
+        return redirect('/userlogin')
+
+    return render_template("userregister.html")
+
+@app.route("/userlogin",methods=["GET","POST"])
+def User_login():
+    if request.method == "POST":
+        getEmail = request.form["email"]
+        getPass = request.form["pass"]
+        cursor = connection.cursor()
+        query = "SELECT * FROM USER WHERE CUST_EMAIL='"+getEmail+"' and CUST_PASSWORD='"+getPass+"' "
+        result = cursor.execute(query).fetchall()
+        if len(result) > 0:
+            print("password correct")
+            return redirect('/dashboard')
+        else:
+            return render_template("userlogin.html", status=True)
+    else:
+        return render_template("userlogin.html", status=False)
+
+@app.route("/sellerregister",methods=['GET','POST'])
+def Seller_register():
+    if request.method == "POST":
+        getName = request.form["name"]
+        getEmail = request.form["email"]
+        getPass = request.form["pass"]
+        getNumber = request.form["pno"]
+        getAcc = request.form["ano"]
+        getIfsc = request.form["ifsc"]
+        connection.execute("INSERT INTO SELLER(SELLER_NAME,SELLER_EMAIL,SELLER_PASSWORD,SELLER_NUMBER,SELLER_ACC,SELLER_IFSC)\
+                           VALUES('"+getName+"','"+getEmail+"','"+getPass+"',"+getNumber+","+getAcc+",'"+getIfsc+"')")
+        connection.commit()
+        print("Seller details inserted successfully")
+        return redirect('/sellerlogin')
+    return render_template("seller_register.html")
+
+@app.route("/sellerlogin",methods=['GET','POST'])
+def Seller_Login():
+    if request.method == "POST":
+        getEmail = request.form["email"]
+        getPass = request.form["pass"]
+        cursor = connection.cursor()
+        query = "SELECT * FROM SELLER WHERE SELLER_EMAIL='"+getEmail+"' AND SELLER_PASSWORD='"+getPass+"'"
+        result = cursor.execute(query).fetchall()
+        if len(result) > 0:
+            return redirect("/add_product")
+        else:
+            return render_template("seller_login.html", status=True)
+    else:
+        return render_template("seller_login.html", status=False)
+
+@app.route("/addproduct",methods=['GET','POST'])
+def Add_product():
+    if request.method == "POST":
+        getCat = request.form[""]
+        getName = request.form[""]
+        getPrice = request.form[""]
+        getFeature = request.form[""]
+        getSeller_id = request.form[""]
+        connection.execute("INSERT INTO PRODUCT(CATEGORY,NAME,PRICE,FEATURE,SELLER_ID)\
+         VALUES('"+getCat+"','"+getName+"',"+getPrice+",'"+getFeature+"',"+getSeller_id+")")
+        connection.commit()
+
+    return render_template("add_product.html")
+
+@app.route("/deleteproduct",methods=['GET','POST'])
+def delete_product():
+    if request.method == 'POST':
+        getName = request.form[""]
+        cursor = connection.cursor()
+        query = "DELETE * FROM PRODUCT WHERE NAME='"+getName+"' "
+        result = cursor.execute(query)
+
+    return render_template("delete_product.html")
+
+@app.route("/dashboard",methods=['GET','POST'])
+def Dashboard():
+    getCategory = request.form[""]
+    getSearch = request.form[""]
+    if len(getCategory)>0:
+        cursor = connection.cursor()
+        query = "SELECT * FROM PRODUCT WHERE CATEGORY='"+getCategory+"' "
+        result1 = cursor.execute(query)
+        return render_template("viewall.html",search=result1,staus=True)
+    elif len(getSearch)>0:
+        cursor = connection.cursor()
+        query = "SELECT * FROM PRODUCT WHERE NAME='"+getSearch+"' "
+        result2 = cursor.execute(query)
+        return render_template("viewall.html", search=result2, staus=True)
+
+    else:
+        return render_template("viewall.html",search=[],status=False)
+
+
+
+if __name__==("__main__"):
+    app.run()
