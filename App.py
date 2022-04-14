@@ -107,7 +107,7 @@ def Seller_Login():
         query = "SELECT * FROM SELLER WHERE SELLER_EMAIL='"+getEmail+"' AND SELLER_PASSWORD='"+getPass+"'"
         result = cursor.execute(query).fetchall()
         if len(result) > 0:
-            return redirect("/add_product")
+            return redirect("/addproduct")
         else:
             return render_template("seller_login.html", status=True)
     else:
@@ -116,24 +116,29 @@ def Seller_Login():
 @app.route("/addproduct",methods=['GET','POST'])
 def Add_product():
     if request.method == "POST":
-        getCat = request.form[""]
-        getName = request.form[""]
-        getPrice = request.form[""]
-        getFeature = request.form[""]
-        getSeller_id = request.form[""]
-        connection.execute("INSERT INTO PRODUCT(CATEGORY,NAME,PRICE,FEATURE,SELLER_ID)\
-         VALUES('"+getCat+"','"+getName+"',"+getPrice+",'"+getFeature+"',"+getSeller_id+")")
-        connection.commit()
+        getCat = request.form["cat"]
+        getName = request.form["name"]
+        getPrice = request.form["price"]
+        getFeature = request.form["fea"]
+        getSeller_id = request.form["sid"]
+        try:
+            connection.execute("INSERT INTO PRODUCT(CATEGORY,NAME,PRICE,FEATURE,SELLER_ID)\
+                     VALUES('" + getCat + "','" + getName + "'," + getPrice + ",'" + getFeature + "'," + getSeller_id + ")")
+            connection.commit()
+            return redirect('/addproduct')
+        except Exception:
+            print(Exception)
 
     return render_template("add_product.html")
 
 @app.route("/deleteproduct",methods=['GET','POST'])
 def delete_product():
     if request.method == 'POST':
-        getName = request.form[""]
-        cursor = connection.cursor()
-        query = "DELETE * FROM PRODUCT WHERE NAME='"+getName+"' "
-        result = cursor.execute(query)
+        getName = request.form["name"]
+        connection.execute("DELETE FROM PRODUCT WHERE NAME='" + getName + "' ")
+        connection.commit()
+        return redirect('/addproduct')
+
 
     return render_template("delete_product.html")
 
@@ -155,6 +160,13 @@ def Dashboard():
     else:
         return render_template("viewall.html",search=[],status=False)
 
+
+@app.route("/viewseller")
+def viewSeller():
+    cursor = connection.cursor()
+    count = cursor.execute("SELECT * FROM PRODUCT")
+    result = cursor.fetchall()
+    return render_template("viewseller.html", sellers=result)
 
 
 if __name__==("__main__"):
