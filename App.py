@@ -1,9 +1,12 @@
+import os
+
 from flask import Flask, request, render_template
 import sqlite3
+from werkzeug.utils import redirect, secure_filename
 
-from werkzeug.utils import redirect
 
-connection = sqlite3.connect("onestop.db", check_same_thread=False)
+
+connection = sqlite3.connect("onestopdata.db", check_same_thread=False)
 table1 = connection.execute("select * from sqlite_master where type = 'table' and name = 'SELLER'").fetchall()
 table2 = connection.execute("select * from sqlite_master where type = 'table' and name = 'USER'").fetchall()
 table3 = connection.execute("select * from sqlite_master where type = 'table' and name = 'PRODUCT'").fetchall()
@@ -43,9 +46,12 @@ else:
                                 NAME TEXT,
                                 PRICE INTEGER,
                                 FEATURE TEXT,
+                                IMAGE TEXT,
                                 SELLER_ID INTEGER); ''')
     print("Product table created")
 app = Flask(__name__)
+
+app.config['UPLOAD_FOLDER'] = "static\images"
 
 @app.route("/",methods=["GET","POST"])
 def User_register():
@@ -116,19 +122,25 @@ def Seller_Login():
 @app.route("/addproduct",methods=['GET','POST'])
 def Add_product():
     if request.method == "POST":
+        upload_image= request.files["image"]
+        if upload_image!='':
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'],upload_image.filename)
+            upload_image.save(filepath)
+
         getCat = request.form["cat"]
         getName = request.form["name"]
         getPrice = request.form["price"]
         getFeature = request.form["fea"]
         getSeller_id = request.form["sid"]
         try:
-            connection.execute("INSERT INTO PRODUCT(CATEGORY,NAME,PRICE,FEATURE,SELLER_ID)\
-                     VALUES('" + getCat + "','" + getName + "'," + getPrice + ",'" + getFeature + "'," + getSeller_id + ")")
+            cursor = connection.cursor()
+            cursor.execute("INSERT INTO PRODUCT(CATEGORY,NAME,PRICE,FEATURE,IMAGE,SELLER_ID,)\
+            VALUES('"+getCat+"','"+getName+"',"+getPrice+",'"+getFeature +"','"+upload_image.filename+"',"+getSeller_id+")")
             connection.commit()
+            print("Inserted successfully")
             return redirect('/addproduct')
         except Exception:
             print(Exception)
-
     return render_template("add_product.html")
 
 @app.route("/deleteproduct",methods=['GET','POST'])
@@ -163,12 +175,11 @@ def Dashboard():
 
 @app.route("/viewseller")
 def viewSeller():
-    name= "muheesh"
     cursor = connection.cursor()
-    count = cursor.execute("SELECT P.ID,P.CATEGORY,P.NAME,P.PRICE,P.FEATURE,P.SELLER_ID FROM PRODUCT P JOIN SELLER S ON S.ID = P.SELLER_ID WHERE P.SELLER_ID=2")
+    count = cursor.execute("SELECT * FROM PRODUCT")
     result = cursor.fetchall()
     return render_template("viewseller.html", sellers=result)
 
 
-if __name__==("__main__"):
-    app.run()
+if __name__ == ("__main__"):
+    app.run(debug=True)
