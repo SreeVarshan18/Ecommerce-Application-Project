@@ -1,6 +1,48 @@
 {% extends "userbase.html" %}
 {% block content %}
-<section class="vh-100 gradient-custom-3">
+<section class="background-radial-gradient overflow-hidden">
+    <style>
+      .background-radial-gradient {
+        background-color: hsl(218, 41%, 15%);
+        background-image: radial-gradient(650px circle at 0% 0%,
+            hsl(218, 41%, 35%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%),
+          radial-gradient(1250px circle at 100% 100%,
+            hsl(218, 41%, 45%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%);
+      }
+  
+      #radius-shape-1 {
+        height: 220px;
+        width: 220px;
+        top: -60px;
+        left: -130px;
+        background: radial-gradient(#44006b, #ad1fff);
+        overflow: hidden;
+      }
+  
+      #radius-shape-2 {
+        border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+        bottom: -60px;
+        right: -110px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(#44006b, #ad1fff);
+        overflow: hidden;
+      }
+  
+      .bg-glass {
+        background-color: hsla(0, 0%, 100%, 0.9) !important;
+        backdrop-filter: saturate(200%) blur(25px);
+      }
+    </style>
+    
     <div class="container py-4 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-xl-10">
@@ -37,7 +79,7 @@
                       <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                     </div>
   
-                    <a class="small text-muted" href="/forgot">Forgot password?</a>
+                    <a class="small text-muted" href="/sellerforgot">Forgot password?</a>
                     <br>
                     <br>
                     {% if status %}
@@ -49,7 +91,7 @@
                     <p class="mb-4 pb-lg-2" style="color: #393f81;">Don't have an account? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-danger" href="/sellerregister"
                         style="color: #393f81;">Register New</a></p>
                     
-                    <a href="#!" class="small text-muted">Terms of use.</a>
+                    <a href="#!" class="small text-muted">Terms of use.</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="#!" class="small text-muted">Privacy policy</a>
                     <br>
                     
@@ -60,6 +102,7 @@
             </div>
           </div>
         </div>
+    
       </div>
     </div>
   </section>

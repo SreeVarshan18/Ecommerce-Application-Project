@@ -181,7 +181,7 @@ def viewSeller():
     return render_template("viewseller.html", sellers=result)
 
 
-@app.route("/forgot",methods=['GET','POST'])
+@app.route("/sellerforgot",methods=['GET','POST'])
 def Forgot():
     if request.method == "POST":
         getEmail = request.form["email"]
@@ -189,9 +189,16 @@ def Forgot():
         query = "SELECT * FROM SELLER WHERE SELLER_EMAIL='"+getEmail+"'"
         result = cursor.execute(query).fetchall()
         if len(result) > 0:
-            return render_template("forgotpass.html", status=True)
+            getCpass1 = request.form["cpass"]
+            getPass1 = request.form["pass"]
+
+            if getPass1 == getCpass1:
+                query2 = "UPDATE SELLER SET SELLER_PASSWORD='"+getPass1+"'"
+                result2 = cursor.execute(query2)
+                connection.commit()
+            return render_template("sellerforgotpass.html", status=True)
     else:
-        return render_template("forgotpass.html", status=False)
+        return render_template("sellerforgotpass.html", status=False)
 
 
 if __name__ == ("__main__"):
