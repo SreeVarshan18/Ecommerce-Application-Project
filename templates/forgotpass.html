@@ -21,37 +21,30 @@
                       <span class="h1 fw-bold mb-0">&nbsp;&nbsp;ONESTOP</span>
                     </div>
   
-                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your seller account</h5>
+                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Forgot Password? Enter Email Address.</h5>
   
                     <div class="form-outline mb-4">
                       <input type="email" id="form2Example17" name="email" class="form-control form-control-lg" />
                       <label class="form-label" for="form2Example17">Email address</label>
                     </div>
-  
-                    <div class="form-outline mb-4">
-                      <input type="password" id="form2Example27" name="pass" class="form-control form-control-lg" />
-                      <label class="form-label" for="form2Example27">Password</label>
-                    </div>
+
                     
                     <div class="pt-1 mb-4">
                       <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                     </div>
   
-                    <a class="small text-muted" href="/forgot">Forgot password?</a>
-                    <br>
-                    <br>
                     {% if status %}
-                    
+                    <div class="form-outline mb-4">
+                        <input type="password" id="form2Example27" name="pass" class="form-control form-control-lg" />
+                        <label class="form-label" for="form2Example27">Password</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="password" id="form2Example27" name="cpass" class="form-control form-control-lg" />
+                        <label class="form-label" for="form2Example27">Confirm Password</label>
+                      </div>
                     <center><h6 style="color: red;">Invalid Email ID or Password</h6></center>
                     <br>
                     {% endif %}
-                    
-                    <p class="mb-4 pb-lg-2" style="color: #393f81;">Don't have an account? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-danger" href="/sellerregister"
-                        style="color: #393f81;">Register New</a></p>
-                    
-                    <a href="#!" class="small text-muted">Terms of use.</a>
-                    <a href="#!" class="small text-muted">Privacy policy</a>
-                    <br>
                     
                   </form>
   

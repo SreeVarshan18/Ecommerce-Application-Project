@@ -181,5 +181,18 @@ def viewSeller():
     return render_template("viewseller.html", sellers=result)
 
 
+@app.route("/forgot",methods=['GET','POST'])
+def Seller_Login():
+    if request.method == "POST":
+        getEmail = request.form["email"]
+        cursor = connection.cursor()
+        query = "SELECT * FROM SELLER WHERE SELLER_EMAIL='"+getEmail+"'"
+        result = cursor.execute(query).fetchall()
+        if len(result) > 0:
+            return render_template("forgotpass.html", status=True)
+    else:
+        return render_template("forgotpass.html", status=False)
+
+
 if __name__ == ("__main__"):
     app.run(debug=True)
