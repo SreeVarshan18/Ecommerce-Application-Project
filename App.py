@@ -6,7 +6,7 @@ from werkzeug.utils import redirect, secure_filename
 
 
 
-connection = sqlite3.connect("onestopdata.db", check_same_thread=False)
+connection = sqlite3.connect("onestop.db", check_same_thread=False)
 table1 = connection.execute("select * from sqlite_master where type = 'table' and name = 'SELLER'").fetchall()
 table2 = connection.execute("select * from sqlite_master where type = 'table' and name = 'USER'").fetchall()
 table3 = connection.execute("select * from sqlite_master where type = 'table' and name = 'PRODUCT'").fetchall()
@@ -30,7 +30,7 @@ else:
                                 ID INTEGER PRIMARY KEY AUTOINCREMENT,
                                 CUST_NAME TEXT,
                                 CUST_EMAIL TEXT,
-                                CUST_GENDER INTEGER,
+                                CUST_GENDER TEXT,
                                 CUST_AGE INTEGER,
                                 CUST_NUMBER INTEGER,
                                 CUST_ADDRESS TEXT,
@@ -58,7 +58,7 @@ def User_register():
     if request.method == "POST":
         getName = request.form["name"]
         getEmail = request.form["email"]
-        getGender = request.form["gen"]
+        getGender = request.form.get('gen')
         getAge = request.form["age"]
         getNumber = request.form["pno"]
         getAddress = request.form["add"]
@@ -82,7 +82,7 @@ def User_login():
         result = cursor.execute(query).fetchall()
         if len(result) > 0:
             print("password correct")
-            return redirect('/dashboard')
+            return redirect('/')
         else:
             return render_template("userlogin.html", status=True)
     else:
@@ -127,7 +127,7 @@ def Add_product():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'],upload_image.filename)
             upload_image.save(filepath)
 
-        getCat = request.form["cat"]
+        getCat = request.form.get("cat")
         getName = request.form["name"]
         getPrice = request.form["price"]
         getFeature = request.form["fea"]
@@ -182,7 +182,7 @@ def viewSeller():
 
 
 @app.route("/forgot",methods=['GET','POST'])
-def Seller_Login():
+def Forgot():
     if request.method == "POST":
         getEmail = request.form["email"]
         cursor = connection.cursor()
