@@ -6,7 +6,7 @@ from werkzeug.utils import redirect, secure_filename
 
 
 
-connection = sqlite3.connect("onestop1.db", check_same_thread=False)
+connection = sqlite3.connect("onestop.db", check_same_thread=False)
 table1 = connection.execute("select * from sqlite_master where type = 'table' and name = 'SELLER'").fetchall()
 table2 = connection.execute("select * from sqlite_master where type = 'table' and name = 'USER'").fetchall()
 table3 = connection.execute("select * from sqlite_master where type = 'table' and name = 'PRODUCT'").fetchall()
@@ -156,7 +156,6 @@ def delete_product():
 
 @app.route("/dashboard",methods=['GET','POST'])
 def Dashboard():
-    getCategory = request.form[""]
     getSearch = request.form[""]
     if len(getCategory)>0:
         cursor = connection.cursor()
