@@ -6,7 +6,7 @@ from werkzeug.utils import redirect, secure_filename
 
 
 
-connection = sqlite3.connect("onestop.db", check_same_thread=False)
+connection = sqlite3.connect("onestop1.db", check_same_thread=False)
 table1 = connection.execute("select * from sqlite_master where type = 'table' and name = 'SELLER'").fetchall()
 table2 = connection.execute("select * from sqlite_master where type = 'table' and name = 'USER'").fetchall()
 table3 = connection.execute("select * from sqlite_master where type = 'table' and name = 'PRODUCT'").fetchall()
@@ -46,7 +46,7 @@ else:
                                 NAME TEXT,
                                 PRICE INTEGER,
                                 FEATURE TEXT,
-                                IMAGE TEXT,
+                                IMAGE BLOB,
                                 SELLER_ID INTEGER); ''')
     print("Product table created")
 app = Flask(__name__)
@@ -127,20 +127,20 @@ def Add_product():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'],upload_image.filename)
             upload_image.save(filepath)
 
-        getCat = request.form.get("cat")
-        getName = request.form["name"]
-        getPrice = request.form["price"]
-        getFeature = request.form["fea"]
-        getSeller_id = request.form["sid"]
-        try:
-            cursor = connection.cursor()
-            cursor.execute("INSERT INTO PRODUCT(CATEGORY,NAME,PRICE,FEATURE,IMAGE,SELLER_ID,)\
-            VALUES('"+getCat+"','"+getName+"',"+getPrice+",'"+getFeature +"','"+upload_image.filename+"',"+getSeller_id+")")
-            connection.commit()
-            print("Inserted successfully")
-            return redirect('/addproduct')
-        except Exception:
-            print(Exception)
+            getCat = request.form.get("cat")
+            getName = request.form["name"]
+            getPrice = request.form["price"]
+            getFeature = request.form["fea"]
+            getSeller_id = request.form["sid"]
+            try:
+                cursor = connection.cursor()
+                cursor.execute("INSERT INTO PRODUCT(CATEGORY,NAME,PRICE,FEATURE,IMAGE,SELLER_ID)\
+                VALUES('"+getCat+"','"+getName+"',"+getPrice+",'"+getFeature +"','"+upload_image.filename+"',"+getSeller_id+")")
+                connection.commit()
+                print("Inserted successfully")
+                return redirect('/addproduct')
+            except Exception as err:
+                print(err)
     return render_template("add_product.html")
 
 @app.route("/deleteproduct",methods=['GET','POST'])
