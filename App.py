@@ -242,8 +242,8 @@ def Forgot():
                 connection.commit()
 
             return render_template("forgotpass.html", status=True)
-        else:
-            return render_template("forgotpass.html", status=False)
+    else:
+        return render_template("forgotpass.html", status=False)
 
 
 if __name__ == ("__main__"):
