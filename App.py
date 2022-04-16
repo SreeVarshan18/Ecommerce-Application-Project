@@ -100,7 +100,7 @@ def User_login():
                 session["name"] = getuName
                 session["id"] = getuId
             print("password correct")
-            return redirect('/')
+            return redirect('/dashboard')
         else:
             return render_template("userlogin.html", status=True)
     else:
@@ -182,22 +182,12 @@ def delete_product():
 
     return render_template("delete_product.html")
 
-@app.route("/dashboard",methods=['GET','POST'])
+@app.route("/dashboard")
 def Dashboard():
-    getSearch = request.form[""]
-    if len(getCategory)>0:
         cursor = connection.cursor()
-        query = "SELECT * FROM PRODUCT WHERE CATEGORY='"+getCategory+"' "
+        query = "SELECT * FROM PRODUCT "
         result1 = cursor.execute(query)
-        return render_template("viewall.html",search=result1,staus=True)
-    elif len(getSearch)>0:
-        cursor = connection.cursor()
-        query = "SELECT * FROM PRODUCT WHERE NAME='"+getSearch+"' "
-        result2 = cursor.execute(query)
-        return render_template("viewall.html", search=result2, staus=True)
-
-    else:
-        return render_template("viewall.html",search=[],status=False)
+        return render_template("viewall.html",view=result1)
 
 @app.route("/cart")
 def User_cart():
@@ -240,7 +230,6 @@ def Forgot():
                 query2 = "UPDATE SELLER SET SELLER_PASSWORD='" + getnPass + "'"
                 cursor.execute(query2)
                 connection.commit()
-
             return render_template("forgotpass.html", status=True)
     else:
         return render_template("forgotpass.html", status=False)
