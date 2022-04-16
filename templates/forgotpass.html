@@ -33,8 +33,9 @@
                       <button class="btn btn-dark btn-lg btn-block" type="submit">Continue</button>
                     </div>
                   </form>
-                    {% if status %}
+                    
                     <form action="/forgot" method="post">
+                      {% if status %}
                     <div class="form-outline mb-4">
                         <input type="password" id="form2Example27" name="pass" class="form-control form-control-lg" />
                         <label class="form-label" for="form2Example27">Password</label>
@@ -46,8 +47,9 @@
                       <div class="pt-1 mb-4">
                         <button class="btn btn-dark btn-lg btn-block" type="submit">Change Password</button>
                       </div>
+                      {% endif %}
                     </form>
-                    {% endif %}
+                    
                     
                   
   

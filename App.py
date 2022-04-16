@@ -172,21 +172,14 @@ def delete_product():
 
     return render_template("delete_product.html")
 
-@app.route("/dashboard",methods=['GET','POST'])
+@app.route("/dashboard")
 def Dashboard():
-    getSearch = request.form[""]
-    if len(getCategory)>0:
         cursor = connection.cursor()
-        query = "SELECT * FROM PRODUCT WHERE CATEGORY='"+getCategory+"' "
-        result1 = cursor.execute(query)
-        return render_template("viewall.html",search=result1,staus=True)
-    elif len(getSearch)>0:
-        cursor = connection.cursor()
-        query = "SELECT * FROM PRODUCT WHERE NAME='"+getSearch+"' "
-        result2 = cursor.execute(query)
-        return render_template("viewall.html", search=result2, staus=True)
-
-    else:
+        query = "SELECT CATEGORY FROM SELLER"
+        result1 = cursor.execute(query).fetchall()
+        for i in result1:
+            query2 = "SELECT * FROM PRODUCT WHERE CATEGORY='"+getSearch+"' "
+            result2 = cursor.execute(query)
         return render_template("viewall.html",search=[],status=False)
 
 
@@ -210,7 +203,7 @@ def Forgot():
             getnCpass = request.form["cpass"]
             if getnPass == getnCpass:
                 query2 = "UPDATE SELLER SET SELLER_PASSWORD='" + getnPass + "'"
-                res = cursor.execute(query2)
+                cursor.execute(query2)
                 connection.commit()
 
             return render_template("forgotpass.html", status=True)
