@@ -1,6 +1,6 @@
 import os
-
-from flask import Flask, request, render_template
+from flask_session import Session
+from flask import Flask, request, render_template, session
 import sqlite3
 from werkzeug.utils import redirect, secure_filename
 
@@ -50,6 +50,9 @@ else:
                                 SELLER_ID INTEGER); ''')
     print("Product table created")
 app = Flask(__name__)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 app.config['UPLOAD_FOLDER'] = "static\images"
 
@@ -81,6 +84,11 @@ def User_login():
         query = "SELECT * FROM USER WHERE CUST_EMAIL='"+getEmail+"' and CUST_PASSWORD='"+getPass+"' "
         result = cursor.execute(query).fetchall()
         if len(result) > 0:
+            for i in result:
+                getuName = i[1]
+                getuId = i[0]
+                session["name"] = getuName
+                session["id"] = getuId
             print("password correct")
             return redirect('/')
         else:
@@ -106,6 +114,7 @@ def Seller_register():
 
 @app.route("/sellerlogin",methods=['GET','POST'])
 def Seller_Login():
+    global id
     if request.method == "POST":
         getEmail = request.form["email"]
         getPass = request.form["pass"]
@@ -113,6 +122,12 @@ def Seller_Login():
         query = "SELECT * FROM SELLER WHERE SELLER_EMAIL='"+getEmail+"' AND SELLER_PASSWORD='"+getPass+"'"
         result = cursor.execute(query).fetchall()
         if len(result) > 0:
+            for i in result:
+                getsName = i[1]
+                getsId = i[0]
+                session["name"] = getsName
+                session["id"] = getsId
+                id = int(session["id"])
             return redirect("/addproduct")
         else:
             return render_template("seller_login.html", status=True)
@@ -121,26 +136,29 @@ def Seller_Login():
 
 @app.route("/addproduct",methods=['GET','POST'])
 def Add_product():
-    if request.method == "POST":
-        upload_image= request.files["image"]
-        if upload_image!='':
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'],upload_image.filename)
-            upload_image.save(filepath)
+    if not session.get("name"):
+        return redirect('/sellerlogin')
+    else:
+        if request.method == "POST":
+            upload_image = request.files["image"]
+            if upload_image != '':
+                filepath = os.path.join(app.config['UPLOAD_FOLDER'], upload_image.filename)
+                upload_image.save(filepath)
 
-            getCat = request.form.get("cat")
-            getName = request.form["name"]
-            getPrice = request.form["price"]
-            getFeature = request.form["fea"]
-            getSeller_id = request.form["sid"]
-            try:
-                cursor = connection.cursor()
-                cursor.execute("INSERT INTO PRODUCT(CATEGORY,NAME,PRICE,FEATURE,IMAGE,SELLER_ID)\
-                VALUES('"+getCat+"','"+getName+"',"+getPrice+",'"+getFeature +"','"+upload_image.filename+"',"+getSeller_id+")")
-                connection.commit()
-                print("Inserted successfully")
-                return redirect('/addproduct')
-            except Exception as err:
-                print(err)
+                getCat = request.form.get("cat")
+                getName = request.form["name"]
+                getPrice = request.form["price"]
+                getFeature = request.form["fea"]
+                getSeller_id = request.form["sid"]
+                try:
+                    cursor = connection.cursor()
+                    cursor.execute("INSERT INTO PRODUCT(CATEGORY,NAME,PRICE,FEATURE,IMAGE,SELLER_ID)\
+                    VALUES('" + getCat + "','" + getName + "'," + getPrice + ",'" + getFeature + "','" + upload_image.filename + "'," + getSeller_id + ")")
+                    connection.commit()
+                    print("Inserted successfully")
+                    return redirect('/addproduct')
+                except Exception as err:
+                    print(err)
     return render_template("add_product.html")
 
 @app.route("/deleteproduct",methods=['GET','POST'])
@@ -175,7 +193,7 @@ def Dashboard():
 @app.route("/viewseller")
 def viewSeller():
     cursor = connection.cursor()
-    count = cursor.execute("SELECT * FROM PRODUCT")
+    count = cursor.execute("SELECT P.CATEGORY, P.NAME, P.PRICE, P.FEATURE, P.IMAGE FROM PRODUCT P JOIN SELLER S")
     result = cursor.fetchall()
     return render_template("viewseller.html", sellers=result)
 
