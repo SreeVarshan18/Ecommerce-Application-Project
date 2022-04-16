@@ -71,17 +71,21 @@ def User_register():
     if request.method == "POST":
         getName = request.form["name"]
         getEmail = request.form["email"]
-        getGender = request.form.get('gen')
+        getGender = request.form.get("gen")
         getAge = request.form["age"]
         getNumber = request.form["pno"]
         getAddress = request.form["add"]
         getPass = request.form["pass"]
-        connection.execute("INSERT INTO USER(CUST_NAME,CUST_EMAIL,CUST_GENDER,CUST_AGE,CUST_NUMBER,CUST_ADDRESS,CUST_PASSWORD)\
-                            VALUES('"+getName+"','"+getEmail+"','"+getGender+"',"+getAge+","+getNumber+",\
-                            '"+getAddress+"','"+getPass+"')")
-        connection.commit()
-        print("Customer details inserted successfully")
-        return redirect('/userlogin')
+        try:
+            connection.execute("INSERT INTO USER(CUST_NAME,CUST_EMAIL,CUST_GENDER,CUST_AGE,CUST_NUMBER,CUST_ADDRESS,CUST_PASSWORD)\
+                                        VALUES('" + getName + "','" + getEmail + "','" + getGender + "'," + getAge + "," + getNumber + "\
+                                        ,'" + getAddress + "','" + getPass + "')")
+            connection.commit()
+            print("Customer details inserted successfully")
+            return redirect('/userlogin')
+        except Exception as e:
+            print("Error Occured", e)
+
 
     return render_template("userregister.html")
 
