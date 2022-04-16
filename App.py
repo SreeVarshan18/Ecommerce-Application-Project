@@ -10,6 +10,7 @@ connection = sqlite3.connect("onestop.db", check_same_thread=False)
 table1 = connection.execute("select * from sqlite_master where type = 'table' and name = 'SELLER'").fetchall()
 table2 = connection.execute("select * from sqlite_master where type = 'table' and name = 'USER'").fetchall()
 table3 = connection.execute("select * from sqlite_master where type = 'table' and name = 'PRODUCT'").fetchall()
+table4 = connection.execute("select * from sqlite_master where type = 'table' and name = 'CART'").fetchall()
 if table1 !=[]:
     print("Seller table already exits")
 else:
@@ -47,8 +48,17 @@ else:
                                 PRICE INTEGER,
                                 FEATURE TEXT,
                                 IMAGE BLOB,
-                                SELLER_ID INTEGER); ''')
+                                SELLER_ID TEXT); ''')
     print("Product table created")
+
+if table4 !=[]:
+    print("Seller table already exits")
+else:
+    connection.execute('''CREATE TABLE CART(
+                                ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                PRODUCT_ID INTEGER,
+                                USER_ID TEXT
+);''')
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -127,7 +137,7 @@ def Seller_Login():
                 getsId = i[0]
                 session["name"] = getsName
                 session["id"] = getsId
-                id = int(session["id"])
+                id = str(session["id"])
             return redirect("/addproduct")
         else:
             return render_template("seller_login.html", status=True)
@@ -149,11 +159,11 @@ def Add_product():
                 getName = request.form["name"]
                 getPrice = request.form["price"]
                 getFeature = request.form["fea"]
-                getSeller_id = request.form["sid"]
+                getSeller_id = id
                 try:
                     cursor = connection.cursor()
                     cursor.execute("INSERT INTO PRODUCT(CATEGORY,NAME,PRICE,FEATURE,IMAGE,SELLER_ID)\
-                    VALUES('" + getCat + "','" + getName + "'," + getPrice + ",'" + getFeature + "','" + upload_image.filename + "'," + getSeller_id + ")")
+                    VALUES('" + getCat + "','" + getName + "'," + getPrice + ",'" + getFeature + "','" + upload_image.filename + "','" + getSeller_id + "')")
                     connection.commit()
                     print("Inserted successfully")
                     return redirect('/addproduct')
@@ -189,18 +199,29 @@ def Dashboard():
     else:
         return render_template("viewall.html",search=[],status=False)
 
+@app.route("/cart")
+def User_cart():
+    getPid = request.args.get('id')
+    getUid = id
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO CART(PRODUCT_ID,USER_ID) VALUES("+getPid+",'"+getUid+"')")
+    connection.commit()
+
+    return render_template("cart.html",result1=cart)
+
 @app.route("/viewexpand")
 def View_expand():
     getid = request.args.get('id')
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM PRODUCT")
+    cursor.execute("SELECT * FROM PRODUCT WHERE ID="+getid)
     result = cursor.fetchall()
     return render_template("viewexpand.html",product=result)
 
 @app.route("/viewseller")
 def viewSeller():
+    getId = id
     cursor = connection.cursor()
-    count = cursor.execute("SELECT P.CATEGORY, P.NAME, P.PRICE, P.FEATURE, P.IMAGE FROM PRODUCT P JOIN SELLER S")
+    count = cursor.execute("SELECT * FROM PRODUCT P JOIN SELLER S ON S.ID=P.SELLER_ID WHERE S.ID="+getId)
     result = cursor.fetchall()
     return render_template("viewseller.html", sellers=result)
 
