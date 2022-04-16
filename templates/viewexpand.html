@@ -1,0 +1,18 @@
+{% extends "userbase.html" %}
+{% block content %}
+
+<div class="container"><div class="row"><div class="col col-12 col-sm-6 col-md-8 col-lg-10 col-xl-12 col-xxl-12">
+<div class="col-4">
+    {% for i in product %}
+    <img src="static/images/{{i[5]}}" alt="" class="rounded float-start">
+    <h2>{{i[2]}}</h2>
+    <h5>{{i[1]}}</h5>
+    <h6>{{i[4]}}</h6>
+    <br>
+    <h5>&#x20B9{{i[3]}}</h5>
+    {% endfor %}
+
+</div>
+</div></div></div>
+
+{% endblock %}

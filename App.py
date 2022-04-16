@@ -171,6 +171,13 @@ def Dashboard():
     else:
         return render_template("viewall.html",search=[],status=False)
 
+@app.route("/viewexpand")
+def View_expand():
+    getid = request.args.get('id')
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM PRODUCT")
+    result = cursor.fetchall()
+    return render_template("viewexpand.html",product=result)
 
 @app.route("/viewseller")
 def viewSeller():
