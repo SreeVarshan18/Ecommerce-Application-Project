@@ -191,13 +191,28 @@ def Dashboard():
 
 @app.route("/cart")
 def User_cart():
-    getPid = request.args.get('id')
-    getUid = id
-    cursor = connection.cursor()
-    cursor.execute("INSERT INTO CART(PRODUCT_ID,USER_ID) VALUES("+getPid+",'"+getUid+"')")
-    connection.commit()
+    try:
+        getPid = request.args.get('id')
+        getUid = id
+        cursor = connection.cursor()
+        cursor.execute("INSERT INTO CART(PRODUCT_ID,USER_ID) VALUES("+getPid+",'"+getUid+"')")
+        connection.commit()
+        print("Product addedd to cart successfully")
+    except Exception as err:
+        print(err)
+    return render_template("dashboard.html")
 
-    return render_template("cart.html",result1=cart)
+@app.route("/cartview")
+def User_cart_View():
+    try:
+        getUid = id
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM PRODUCT P JOIN CART C ON C.PRODUCT_ID=P.ID WHERE C.USER_ID="+getUid)
+        result = cursor.fetchall()
+        return render_template("cartview.html",cart=result,status=True)
+    except Exception as err:
+        print(err)
+    return render_template("cartview.html",cart=[],status=False)
 
 @app.route("/viewexpand")
 def View_expand():
@@ -234,6 +249,17 @@ def Forgot():
     else:
         return render_template("forgotpass.html", status=False)
 
+
+@app.route('/userlogout')
+def user_logout():
+    session["name"] = None
+    return redirect('/userlogin')
+
+
+@app.route('/sellerlogout')
+def seller_logout():
+    session["name"] = None
+    return redirect('/sellerlogin')
 
 if __name__ == ("__main__"):
     app.run(debug=True)

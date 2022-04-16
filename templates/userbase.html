@@ -35,11 +35,24 @@ rel="stylesheet"
       </button>
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/addproduct">Add Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/deleteproduct">Delete Products</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="#">Mobile/computers</a></li>
+              <li><a class="dropdown-item" href="#">TV/Appliances/electronics</a></li>
+              <li><a class="dropdown-item" href="#">Men’s Fashion</a></li>
+              <li><a class="dropdown-item" href="#">Women’s Fashion</a></li>
+              <li><a class="dropdown-item" href="#">Home/Kitchen</a></li>
+              <li><a class="dropdown-item" href="#">Beauty/Health</a></li>
+              <li><a class="dropdown-item" href="#">Sports/Fitness</a></li>
+              <li><a class="dropdown-item" href="#">Toys/Baby Products</a></li>
+              <li><a class="dropdown-item" href="#">Car/Automobile</a></li>
+              <li><a class="dropdown-item" href="#">Books</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">See All Categories</a></li>
+            </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/viewseller">View Products</a>
@@ -81,7 +94,7 @@ Not Yet Login
                 <a class="dropdown-item" href="#">Settings</a>
               </li>
               <li>
-                <a class="dropdown-item" href="/sellerlogout">Logout</a>
+                <a class="dropdown-item" href="/userlogout">Logout</a>
               </li>
             </ul>
           </div>
