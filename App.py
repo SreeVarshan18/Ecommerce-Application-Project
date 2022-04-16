@@ -234,10 +234,29 @@ def Forgot():
         query = "SELECT * FROM SELLER WHERE SELLER_EMAIL='"+getEmail+"'"
         result = cursor.execute(query).fetchall()
         if len(result) > 0:
+
             return render_template("forgotpass.html", status=True)
     else:
         return render_template("forgotpass.html", status=False)
 
+
+# @app.route("/cart")
+# def cart():
+#     getPid = request.args.get('id')
+#     getUid = id
+#     cursor = connection.cursor()
+#     cursor.execute("INSERT INTO CART(PRODUCT_ID,USER_ID) VALUES("+getPid+",'"+getUid+"')")
+#     connection.commit()
+#     print("Product addedd to cart successfully")
+#     return render_template("cartview.html", cart=result)
+
+@app.route("/cartview")
+def cart():
+    # getUid = id
+    # cursor = connection.cursor()
+    # cursor.execute("SELECT * FROM PRODUCT P JOIN CART C ON C.PRODUCT_ID=P.ID WHERE C.USER_ID="+getUid)
+    # result = cursor.fetchall()
+    return render_template("cartview.html")
 
 if __name__ == ("__main__"):
     app.run(debug=True)
