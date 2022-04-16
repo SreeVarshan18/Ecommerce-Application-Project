@@ -234,9 +234,16 @@ def Forgot():
         query = "SELECT * FROM SELLER WHERE SELLER_EMAIL='"+getEmail+"'"
         result = cursor.execute(query).fetchall()
         if len(result) > 0:
+            getnPass = request.form["pass"]
+            getnCpass = request.form["cpass"]
+            if getnPass == getnCpass:
+                query2 = "UPDATE SELLER SET SELLER_PASSWORD='" + getnPass + "'"
+                cursor.execute(query2)
+                connection.commit()
+
             return render_template("forgotpass.html", status=True)
-    else:
-        return render_template("forgotpass.html", status=False)
+        else:
+            return render_template("forgotpass.html", status=False)
 
 
 if __name__ == ("__main__"):
