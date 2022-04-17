@@ -169,7 +169,7 @@ def Add_product():
                     return redirect('/addproduct')
                 except Exception as err:
                     print(err)
-    return render_template("add_product.html")
+    return render_template("AddProducts.html")
 
 @app.route("/deleteproduct",methods=['GET','POST'])
 def delete_product():
