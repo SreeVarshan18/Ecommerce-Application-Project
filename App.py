@@ -87,6 +87,7 @@ def User_register():
 
 @app.route("/userlogin",methods=["GET","POST"])
 def User_login():
+    global Uid
     if request.method == "POST":
         getEmail = request.form["email"]
         getPass = request.form["pass"]
@@ -99,6 +100,7 @@ def User_login():
                 getuId = i[0]
                 session["name"] = getuName
                 session["id"] = getuId
+                Uid = str(session["id"])
             print("password correct")
             return redirect('/dashboard')
         else:
@@ -166,7 +168,7 @@ def Add_product():
                     VALUES('" + getCat + "','" + getName + "'," + getPrice + ",'" + getFeature + "','" + upload_image.filename + "','" + getSeller_id + "')")
                     connection.commit()
                     print("Inserted successfully")
-                    return redirect('/addproduct')
+                    return redirect('/viewseller')
                 except Exception as err:
                     print(err)
     return render_template("add_product.html")
@@ -185,27 +187,56 @@ def delete_product():
 @app.route("/dashboard")
 def Dashboard():
         cursor = connection.cursor()
-        query = "SELECT * FROM PRODUCT "
-        result1 = cursor.execute(query)
-        return render_template("viewall.html",view=result1)
+        query = "SELECT * FROM PRODUCT WHERE CATEGORY='Mobile/computers' "
+        count1 = cursor.execute(query)
+        result1 = cursor.fetchall()
+        query2 = "SELECT * FROM PRODUCT WHERE CATEGORY='TV/Appliances/electronics' "
+        count2 = cursor.execute(query2)
+        result2 = cursor.fetchall()
+        query3 = "SELECT * FROM PRODUCT WHERE CATEGORY='Men’s Fashion' "
+        count3 = cursor.execute(query3)
+        result3 = cursor.fetchall()
+        query4 = "SELECT * FROM PRODUCT WHERE CATEGORY='Women’s Fashion' "
+        count4 = cursor.execute(query4)
+        result4 = cursor.fetchall()
+        query5 = "SELECT * FROM PRODUCT WHERE CATEGORY='Home/Kitchen' "
+        count5 = cursor.execute(query5)
+        result5 = cursor.fetchall()
+        query6 = "SELECT * FROM PRODUCT WHERE CATEGORY='Beauty/Health' "
+        count6 = cursor.execute(query6)
+        result6 = cursor.fetchall()
+        query7 = "SELECT * FROM PRODUCT WHERE CATEGORY='Sports/Fitness' "
+        count7 = cursor.execute(query7)
+        result7 = cursor.fetchall()
+        query8 = "SELECT * FROM PRODUCT WHERE CATEGORY='Toys/Baby Products' "
+        count8 = cursor.execute(query8)
+        result8 = cursor.fetchall()
+        query9 = "SELECT * FROM PRODUCT WHERE CATEGORY='Car/Automobile' "
+        count9 = cursor.execute(query9)
+        result9 = cursor.fetchall()
+        query10 = "SELECT * FROM PRODUCT WHERE CATEGORY='Books' "
+        count10 = cursor.execute(query10)
+        result10 = cursor.fetchall()
+        return render_template("viewall.html",mc=result1, tae=result2, mf=result3, wf=result4, hk=result5, bh=result6, sf=result7, tb=result8, ca=result9, b=result10)
 
 @app.route("/cart")
 def User_cart():
     try:
         getPid = request.args.get('id')
-        getUid = id
+        getUid = Uid
         cursor = connection.cursor()
         cursor.execute("INSERT INTO CART(PRODUCT_ID,USER_ID) VALUES("+getPid+",'"+getUid+"')")
         connection.commit()
         print("Product addedd to cart successfully")
+
     except Exception as err:
         print(err)
-    return render_template("dashboard.html")
+    return redirect('/cartview')
 
 @app.route("/cartview")
 def User_cart_View():
     try:
-        getUid = id
+        getUid = Uid
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM PRODUCT P JOIN CART C ON C.PRODUCT_ID=P.ID WHERE C.USER_ID="+getUid)
         result = cursor.fetchall()
