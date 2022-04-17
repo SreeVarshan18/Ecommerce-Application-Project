@@ -1,71 +1,78 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="bg-success text-dark p-5 text-center">
-    <div class="container">
-        <center><img src="https://lh3.googleusercontent.com/kJj8i3cnVujP64xU4DlDnCstKp4dHdbfh9tjKMY8cGKf5rZcpXU5Lr9BBJryWhTr3v6lI9xV41GQvYx6L-LUDhu5YmUbWpQwv3UHxirpgZgCch1-zC2webq3LuNirXZxsq8CY8N6KSMMKiYNjpBIKhZXCl-Ru-glUfKojQTdMepLhp9AhJoqYPyKmivyByeJUavzEZLG1ZizM4IeBS1WjS8o359fYPHs7DNxT2T7xjWM_dXfepJVMniWBHGd5sv2YUaH_LuZuAVAAZfsDe7Y23CO69VlUKl_9a91R0_N_qIptF-FNi3TKTcesD_Y2J9j6TtyA-PzTj7M34Xb0HZuL1Ih1CCXT1ypZYvgSMvYzEkf5xMG8CIh1zwSeIOabHFPWwuajvqr7ELonuvs7cKxu4DVszN_x12J8DRxW_7KnebsGfOFDzC7lyUtXGW22jd5dz5BRrdp0nFQ3jdq6WgOSstcdxBTBFD1-cwFLUGqRHK4RIUa-ho5D7E_qzOYvlAa3qnbTwOAOdrLxyIkfOtHQyeJe43s3m2YwFg81MYt0c2Jwfg9DZUC9J5sEgLqJyr8e2tflzyK4JeP1ZMFAW-9kphM2Z6v07_5JTsVLyqC67mF7Ts2Ixvs_3BqWFz2-PLNpM--YN9ZBWU2gHP2xfdp9qCM4diUQ-0twk41XKMslj9VIaV6G2Aqi_J9MYHYOSKDiEQWT5NUB6T2wIz_7l9HmLhqrvkOI2B_to37D-Vp7UoCf_UZzeWR3A4PrKAK1IM4OJLjGiuBaa58RUvsh0d7RvAw6l7KO6hDkJY=s700-no?authuser=0" width="150" height="150" alt="">
-            <br></center>
-        <br>
-        <center><h1> <span class="text-light">
-            Seller 
-        </span>
-        Registration</h1></center> 
 
-    </div>
-</section>
-<div class="container">
-    <div class="row">
-        <div class="col">
-
-        </div>
-        <div class="col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-8 col-xxl-6">
-
-           
-           
-            <form action="/sellerregister" method="post">
-                <br>
+<section class="vh-100 bg-image" style="background-image: url('/static/UI/SellerRegistration\ Image.webp');">
+    <div class="mask d-flex align-items-center h-150 gradient-custom-3">
+      <div class="container h-150">
+        <div class="row d-flex justify-content-center align-items-center h-150">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <br>
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-4">
+                  <br>
+                <h2 class="text-uppercase text-center mb-5">Seller Registration</h2>
+                <form action="/sellerregister" method="post">
                 <table class="table">
+  
+                  <div class="form-outline mb-4">
                     <tr>
-                        <td>Name</td>
+                        <td><h6>Name</h6></td>
                         <td><input name="name" type="text" class="form-control"></td>
                     </tr>
+                  </div>
+  
+                  <div class="form-outline mb-4">
                     <tr>
-                        <td>Phone Number</td>
+                        <td><h6>Phone Number</h6></td>
                         <td><input name="pno" type="text" class="form-control"></td>
                     </tr>
+                  </div>
+  
+                  <div class="form-outline mb-4">
                     <tr>
-                        <td>Email</td>
+                        <td><h6>Email</h6></td>
                         <td><input name="email" type="text" class="form-control"></td>
                     </tr>
-                    
+                  </div>
+  
+                  <div class="form-outline mb-4">
                     <tr>
-                        <td>Password</td>
+                        <td><h6>Password</h6></td>
                         <td><input name="pass" type="password" class="form-control"></td>
                     </tr>
+                  </div>
+  
+                 <div class="form-outline mb-4">
                     <tr>
-                        <td>Account Number</td>
+                        <td><h6>Account Number</h6></td>
                         <td><input name="ano" type="text" class="form-control"></td>
                     </tr>
+
+                 </div>
+                 <div class="form-outline mb-4">
                     <tr>
-                        <td>IFSC Code</td>
+                        <td><h6>IFSC Code</h6></td>
                         <td><input name="ifsc" type="text" class="form-control"></td>
                     </tr>
-                    
+                 </div>
+  
                 </table>
+                <div class="d-flex justify-content-center">
                 <center><button type="submit" class="btn btn-primary">Register</button></center>
+                </div>
+                <br>
+               
+                <center><p class="mb-4 pb-lg-2" style="color: #393f81;">Already have an Account &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-info" href="/sellerlogin"
+                    style="color: #393f81;">Login</a></p></center>
+          
             </form>
+  
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col">
-
-        </div>
+      </div>
     </div>
-
-</div>
-<br>
-<br>
-
-
-
-
-
+  </section>
 
 {% endblock %}
