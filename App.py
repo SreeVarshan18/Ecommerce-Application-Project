@@ -240,7 +240,13 @@ def User_cart_View():
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM PRODUCT P JOIN CART C ON C.PRODUCT_ID=P.ID WHERE C.USER_ID="+getUid)
         result = cursor.fetchall()
-        return render_template("cartview.html",cart=result,status=True)
+        cursor.execute("SELECT SUM(PRICE) AS PRICE FROM PRODUCT P JOIN CART C ON C.PRODUCT_ID = P.ID WHERE C.USER_ID="+getUid)
+        result1 = cursor.fetchall()
+        for i in result1:
+            print(i[0])
+        return render_template("cartview.html",cart=result,total=result1,status=True)
+
+
     except Exception as err:
         print(err)
     return render_template("cartview.html",cart=[],status=False)
