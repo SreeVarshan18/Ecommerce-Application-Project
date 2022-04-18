@@ -173,6 +173,66 @@ def Add_product():
                     print(err)
     return render_template("add_product.html")
 
+@app.route("/order")
+def Order_Received():
+    getSid = id
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM PRODUCT P JOIN BUY B ON B.PRODUCT_ID = P.ID WHERE P.SELLER_ID="+getSid)
+    result = cursor.fetchall()
+    for i in result:
+        print(i[2])
+    return render_template("order.html",order=result)
+
+@app.route("/deletecart",methods=['GET','POST'])
+def Delete_cart():
+    try:
+        getPid = request.args.get('id')
+        getUid = Uid
+        cursor = connection.cursor()
+        cursor.execute("DELETE FROM CART WHERE PRODUCT_ID="+getPid+" AND USER_ID='"+getUid+"'")
+        connection.commit()
+        print("Product deleted from cart")
+
+    except Exception as err:
+        print(err)
+    return redirect('/cartview')
+
+
+
+@app.route("/search",methods=['GET','POST'])
+def Search_dashboard():
+    if request.method == 'POST':
+        getName = request.form["sea"]
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM PRODUCT WHERE NAME LIKE '%"+getName+"%' ")
+        result = cursor.fetchall()
+        return render_template("viewall.html",search=result, status=True)
+    else:
+        return render_template("viewall.html", search=[], status=False)
+
+
+@app.route("/update",methods=['GET','POST'])
+def Update_user():
+    if request.method == 'POST':
+        getUid = Uid
+        getName = request.form["name"]
+        getEmail = request.form["email"]
+        getGender = request.form.get('gen')
+        getAge = request.form["age"]
+        getNumber = request.form["pno"]
+        getAddress = request.form["add"]
+        getPass = request.form["pass"]
+        connection.execute("UPDATE USER SET CUST_NAME='"+getName+",CUST_EMAIL='"+getEmail +"',CUST_GENDER='"+getGender+"',\
+        CUST_AGE="+getAge+",CUST_NUMBER="+getNumber+",CUST_ADDRESS='"+getAddress+"',CUST_PASSWORD='"+getPass+"' WHERE ID="+getUid)
+        connection.commit()
+        print("Updated User Details")
+        return redirect("/dashboard")
+
+    return render_template("updateUser.html")
+
+
+
+
 @app.route("/deleteproduct",methods=['GET','POST'])
 def delete_product():
     if request.method == 'POST':
@@ -186,6 +246,7 @@ def delete_product():
 
 @app.route("/dashboard")
 def Dashboard():
+
         cursor = connection.cursor()
         query = "SELECT * FROM PRODUCT WHERE CATEGORY='Mobile/computers' "
         count1 = cursor.execute(query)
@@ -217,7 +278,7 @@ def Dashboard():
         query10 = "SELECT * FROM PRODUCT WHERE CATEGORY='Books' "
         count10 = cursor.execute(query10)
         result10 = cursor.fetchall()
-        return render_template("viewall.html",mc=result1, tae=result2, mf=result3, wf=result4, hk=result5, bh=result6, sf=result7, tb=result8, ca=result9, b=result10)
+        return render_template("viewall.html",mc=result1, tae=result2, mf=result3, wf=result4, hk=result5, bh=result6, sf=result7, tb=result8, ca=result9, b=result10, sta=True)
 
 @app.route("/cart")
 def User_cart():

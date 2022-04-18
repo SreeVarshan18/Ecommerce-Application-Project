@@ -95,6 +95,14 @@ height: 50vh; min-height: 300px; background: no-repeat scroll center scroll; -we
     background-color: rgb(132, 30, 132);
    }
 
+.dropdown{
+    margin-right: 10px;
+}
+
+.search{
+    margin-right: 20px;
+}
+
    </style>
 </head>
 <body>
@@ -129,9 +137,12 @@ height: 50vh; min-height: 300px; background: no-repeat scroll center scroll; -we
                 </ul>
               </li>
             </ul>
-
+            
             <div class="d-flex align-items-center">
-
+                <form action="/search" class="d-flex search" method="post">
+                    <input name="sea" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
 
                     <!-- Icon -->
                     <a class="text-reset me-3" href="/cartview">
@@ -160,13 +171,13 @@ height: 50vh; min-height: 300px; background: no-repeat scroll center scroll; -we
                   aria-labelledby="navbarDropdownMenuAvatar"
                 > {% if session.name %}
                   <li>
-                    <a class="dropdown-item" href="#">{{session.name}}</a>
+                    <a class="dropdown-item" href="/update">{{session.name}}</a>
                   </li>
                   {% else %}
     Not Yet Login
     {% endif %}
                   <li>
-                    <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item" href="">Settings</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="/userlogout">Logout</a>
@@ -175,7 +186,7 @@ height: 50vh; min-height: 300px; background: no-repeat scroll center scroll; -we
               </div>
             </div>
             <!-- Right elements -->
-
+            
           </div>
         </div>
 
@@ -225,6 +236,53 @@ height: 50vh; min-height: 300px; background: no-repeat scroll center scroll; -we
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+{% if status %}
+      <br><br>
+
+      <div class="container section">
+      <section class="section text-dark p-4 text-center">
+          <div class="container section">
+              <br>
+              <center><h1 id="list-item-1"> <span class="text-light">
+                  Searched 
+              </span>
+              Results</h1></center>
+      
+          </div>
+      </section>
+      </div>
+      <div class="container">
+          <div class="row">
+              {% for i in search %}
+              <div class="col col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+                  <br>
+                  <center>
+                      <div class="card" style="width: 18rem;">
+                          <img src="/static/images/{{i[5]}}" class="card-img-top" width="200px" height="300px" alt="..." >
+                          <div class="card-body">
+                              <center> <h5 class="card-title"><a style="color:black; font-size:25px; text-decoration:none;" href="/viewexpand?id={{i[0]}}">{{i[2]}}</a></h5></center>
+      
+                          </div>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{i[1]}}</li>
+                            <li class="list-group-item">Rs.{{i[3]}}</li>
+                          </ul>
+                          <div class="card-body">
+                             <a href="#" class="btn btn-outline-primary">Buy Now</a>&nbsp;&nbsp;&nbsp;
+                              <a href="/cart?id={{i[0]}}" class="btn btn-success">Add to Cart</a>
+                          </div>
+                        </div>
+                  </center>
+      
+              </div>
+              {% endfor %}
+          </div>
+      </div>
+      
+      
+      {% endif %}
+
+      {% if sta %}
 
 <br><br>
 
@@ -646,7 +704,7 @@ height: 50vh; min-height: 300px; background: no-repeat scroll center scroll; -we
         {% endfor %}
     </div>
 </div>
-
+{% endif %}
 
 
 
