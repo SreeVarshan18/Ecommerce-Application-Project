@@ -25,7 +25,7 @@ rel="stylesheet"
 <style>
 body {
     font-family: 'Roboto Condensed', sans-serif;
-    background-color: #f5f5f5
+    
 }
 
 .hedding {
@@ -81,6 +81,12 @@ position: absolute;
         height: auto;
     }
 }
+
+
+.fas{
+    color: white;
+}
+
 </style>
 
 
@@ -129,7 +135,9 @@ position: absolute;
 
         <div class="d-flex align-items-center">
 
-
+            <a class="text-reset me-3" href="/cartview">
+                <i class="fas fa-shopping-cart "></i>
+              </a>
           <!-- Avatar -->
           <div class="dropdown">
             <a
@@ -174,10 +182,10 @@ Not Yet Login
 
   </nav>
 
-  <div class="container">
+  <div class="container ">
     <div class="col-lg-8 border p-3 main-section bg-white">
         {% for i in product %}
-        <div class="row hedding m-0 pl-3 pt-0 pb-3">
+        <div class="row hedding m-0 pl-3 pt-0 pb-3 ">
            <h3>PRODUCT DETAILS</h3> 
         </div>
         <div class="row m-0">
