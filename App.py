@@ -244,6 +244,12 @@ def delete_product():
 
     return render_template("delete_product.html")
 
+
+
+
+
+
+
 @app.route("/dashboard")
 def Dashboard():
 
