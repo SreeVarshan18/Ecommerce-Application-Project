@@ -48,8 +48,78 @@ rel="stylesheet"
 
 </style>
 </head>
-<body>
-        <section class="bg-success text-dark text-center backy">
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-dark   ">
+    <div class="container-fluid">
+
+        <img src="https://lh3.googleusercontent.com/Km_UmHfRla3jf-JzYtkozB-9M9XFtwe0bNk46pwtS-BA1YDaKLZzbi27HWlCVe6KF6PUvrxmvWgLO9lZWzcM0BYE9FLdTQfyY4dHsIA9IqSbn5C1oLKoAQ6zAT2FVDIIX_wP_d2lEgR2K8cO7t7l-nPS_JeMQw-gDmetJfwGQAlYmPNKSD5pnRTN1lczRf2B4ZN4Gb-GpHZT151264PpfWS-aBjGHVhEjQT1YhsmeXYAWdSSIXS65Pg2N8E7veCaPtOjcDyojxuF7Bxqyo1oVj0i5ZOv0k-HutlGUrGRA_WBoNiWDYkbjYcVP0wdyU97a1baszOImZ_DZ83ynuqNPzUeN_-c8Pm4ZkrYaLZaXawa8Zh6wb-weU82WEjgOKswl5f5kVfhyEtBW25H6AJ0NaYk7uf-aRSAyxRumPDEvxU6OJALOklGPGPEIp95H9Wyxsf5-LEgQ4i65GXgeIW4H6iyRfENZfzk2VDX2XxpvS9Bcpd0EMAj4kXug9BPwWZM5MIfKhwcrbvpkJyia3J6eQiHpeCzk19h-hh3Nm1wqpqvlWaUOQADrUSUcVB-BEYzQuQZpsXRkb1W4g2R7E3lWW0VtU66MNoF4-GxQcMol5no8IU6JdDZT2YQP93Jz9mEpdq-LSrA4zCLzGXh6rxQNd6rJRIfK2lEWlEBvMyStF2tb0JbLcLZNYzKCHdIDIulf0k0ajJIoFtGECv5-oaSOUv9hJ05O38-H_nPww5E8MgyHlaRE0yb2TBaUhRZxkaEBeji9atQZkDJccaVsxfAJ0pTB6ajAmJtMYs=s700-no?authuser=0" width="50" height="50" alt="ONESTOP">
+
+      <a class="navbar-brand" href="#">&nbsp;&nbsp;ONESTOP</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/addproduct">Add Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/deleteproduct">Delete Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/viewseller">View Products</a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center">
+
+          <a class="text-reset me-3" href="/cartview">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+
+          <!-- Avatar -->
+          <div class="dropdown">
+            <a
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                class="rounded-circle"
+                height="45"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            > {% if session.name %}
+              <li>
+                <a class="dropdown-item" href="#">{{session.name}}</a>
+              </li>
+              {% else %}
+Not Yet Login
+{% endif %}
+              <li>
+                <a class="dropdown-item" href="#">Settings</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/sellerlogin">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Right elements -->
+
+      </div>
+    </div>
+
+  </nav>
+        <section class="bg-success text-dark text-center backy p-3">
             <div class="container-fluid">
                 <!-- <center><img src="https://lh3.googleusercontent.com/kJj8i3cnVujP64xU4DlDnCstKp4dHdbfh9tjKMY8cGKf5rZcpXU5Lr9BBJryWhTr3v6lI9xV41GQvYx6L-LUDhu5YmUbWpQwv3UHxirpgZgCch1-zC2webq3LuNirXZxsq8CY8N6KSMMKiYNjpBIKhZXCl-Ru-glUfKojQTdMepLhp9AhJoqYPyKmivyByeJUavzEZLG1ZizM4IeBS1WjS8o359fYPHs7DNxT2T7xjWM_dXfepJVMniWBHGd5sv2YUaH_LuZuAVAAZfsDe7Y23CO69VlUKl_9a91R0_N_qIptF-FNi3TKTcesD_Y2J9j6TtyA-PzTj7M34Xb0HZuL1Ih1CCXT1ypZYvgSMvYzEkf5xMG8CIh1zwSeIOabHFPWwuajvqr7ELonuvs7cKxu4DVszN_x12J8DRxW_7KnebsGfOFDzC7lyUtXGW22jd5dz5BRrdp0nFQ3jdq6WgOSstcdxBTBFD1-cwFLUGqRHK4RIUa-ho5D7E_qzOYvlAa3qnbTwOAOdrLxyIkfOtHQyeJe43s3m2YwFg81MYt0c2Jwfg9DZUC9J5sEgLqJyr8e2tflzyK4JeP1ZMFAW-9kphM2Z6v07_5JTsVLyqC67mF7Ts2Ixvs_3BqWFz2-PLNpM--YN9ZBWU2gHP2xfdp9qCM4diUQ-0twk41XKMslj9VIaV6G2Aqi_J9MYHYOSKDiEQWT5NUB6T2wIz_7l9HmLhqrvkOI2B_to37D-Vp7UoCf_UZzeWR3A4PrKAK1IM4OJLjGiuBaa58RUvsh0d7RvAw6l7KO6hDkJY=s700-no?authuser=0" width="150" height="150" alt="">
                     <br></center> -->
@@ -61,25 +131,25 @@ rel="stylesheet"
         
             </div>
         </section>
-        <div class="topnav mb-2">
-            <div class="topnav-right">
-                <button class="btn btn-danger pull-right"><a class="text-light" href="/deleteproduct">Logout</a></button>
-            </div>
-          </div>
-        <div class="topnav">
-        <ul class="nav nav-tabs mb-3">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/addproduct">Add Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/deleteproduct">Delete Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="/viewseller">My Inventory</a>
-            </li>
-    </div>
+<!--        <div class="topnav mb-2">-->
+<!--            <div class="topnav-right">-->
+<!--                <button class="btn btn-danger pull-right"><a class="text-light" href="/deleteproduct">Logout</a></button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        <div class="topnav">-->
+<!--        <ul class="nav nav-tabs mb-3">-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" aria-current="page" href="/addproduct">Add Products</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="/deleteproduct">Delete Products</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link active" href="/viewseller">My Inventory</a>-->
+<!--            </li>-->
+<!--    </div>-->
 <div class="container">
-    <div class="row">
+    <div class="row mt-3">
                 {% for i in sellers %}
             <div class="col col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
 
