@@ -1,110 +1,72 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="h-100 bg-dark">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col">
-          <div class="card card-registration my-4">
-            <div class="row g-0">
-              <div class="col-xl-6 d-none d-xl-block">
-                <img
-                  src="/static/UI/Registration image.webp"
-                  alt="Sample photo"
-                  class="img-fluid"
-                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;"
-                />
-              </div>
-              <div class="col-xl-6">
-                <div class="card-body p-md-5 text-black">
-                  <h3 class="mb-5 text-uppercase">User Registration</h3>
-                  <form action="/" method="post">
-                    <br>
-                    <table class="table">
 
-
-
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                        <tr>
-                            <td><h5>Name</h5></td>
-                            <td><input name="name" type="text" class="form-control"></td>
-                        </tr>
-                      </div>
-                    </div>
-
-
-
-
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                        <tr>
-                            <td><h5>Age</h5></td>
-                            <td><input name="age" type="text" class="form-control"></td>
-                        </tr>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                        <tr>
-                            <td><h5>Gender</h5></td>
-                            <td><div class="input-group">
-                                <select class="form-select" id="inputGroupSelect04" name="gen">
-                                  <option selected>Choose Option</option>
-                                  <option value="1">Male</option>
-                                  <option value="2">Female</option>
-                                  <option value="3">Other</option>
-                                </select>
-                              </div></td>
-                        </tr>
-                        <tr>
-                      </div>
-                    </div>
-
+<section class="vh-100 bg-image" style="background-image: url('/static/UI/SellerRegistration\ Image.webp');">
+    <div class="mask d-flex align-items-center h-150 gradient-custom-3">
+      <div class="container h-150">
+        <div class="row d-flex justify-content-center align-items-center h-150">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <br>
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-1">
+                  <br>
+                <h2 class="text-uppercase text-center mb-5">Seller Registration</h2>
+                <form action="/sellerregister" method="post">
+                <table class="table">
 
                   <div class="form-outline mb-4">
                     <tr>
-                        <td><h5>Address</h5></td>
-                        <td>
-                            <div class="mb-3">
-                            <textarea name="add" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                          </div>
-                        </td>
-                    </tr>
-                  </div>
-
-
-
-
-                  <div class="form-outline mb-4">
-                    <tr>
-                        <td><h5>Email</h5></td>
-                        <td><input name="email" type="text" class="form-control"></td>
+                        <td><h6>Name</h6></td>
+                        <td><input name="name" type="text" class="form-control"></td>
                     </tr>
                   </div>
 
                   <div class="form-outline mb-4">
                     <tr>
-                        <td><h5>Phone Number</h5></td>
+                        <td><h6>Phone Number</h6></td>
                         <td><input name="pno" type="text" class="form-control"></td>
                     </tr>
                   </div>
 
                   <div class="form-outline mb-4">
                     <tr>
-                        <td><h5>Password</h5></td>
+                        <td><h6>Email</h6></td>
+                        <td><input name="email" type="text" class="form-control"></td>
+                    </tr>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <tr>
+                        <td><h6>Password</h6></td>
                         <td><input name="pass" type="password" class="form-control"></td>
                     </tr>
                   </div>
 
+                 <div class="form-outline mb-4">
+                    <tr>
+                        <td><h6>Account Number</h6></td>
+                        <td><input name="ano" type="text" class="form-control"></td>
+                    </tr>
+
+                 </div>
+                 <div class="form-outline mb-4">
+                    <tr>
+                        <td><h6>IFSC Code</h6></td>
+                        <td><input name="ifsc" type="text" class="form-control"></td>
+                    </tr>
+                 </div>
+
                 </table>
-                <center><button type="submit" class="btn btn-primary"><h6>Register</h6></button></center>
+                <div class="d-flex justify-content-center">
+                <center><button type="submit" class="btn btn-primary">Register</button></center>
+                </div>
                 <br>
 
-                <p class="mb-4 pb-lg-2" style="color: #393f81;">Already have an Account &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-info" href="/userlogin"
-                  style="color: #393f81;">Login</a></p>
-              </form>
+                <center><p class="mb-4 pb-lg-2" style="color: #393f81;">Already have an Account &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-info" href="/sellerlogin"
+                    style="color: #393f81;">Login</a></p></center>
 
-                </div>
+            </form>
+
               </div>
             </div>
           </div>
@@ -112,7 +74,5 @@
       </div>
     </div>
   </section>
-
-
 
 {% endblock %}
