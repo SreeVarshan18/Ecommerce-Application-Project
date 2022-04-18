@@ -222,7 +222,7 @@ def Update_user():
         getNumber = request.form["pno"]
         getAddress = request.form["add"]
         getPass = request.form["pass"]
-        connection.execute("UPDATE USER SET CUST_NAME='"+getName+",CUST_EMAIL='"+getEmail +"',CUST_GENDER='"+getGender+"',\
+        connection.execute("UPDATE USER SET CUST_NAME='"+getName+"',CUST_EMAIL='"+getEmail +"',CUST_GENDER='"+getGender+"',\
         CUST_AGE="+getAge+",CUST_NUMBER="+getNumber+",CUST_ADDRESS='"+getAddress+"',CUST_PASSWORD='"+getPass+"' WHERE ID="+getUid)
         connection.commit()
         print("Updated User Details")
