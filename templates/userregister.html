@@ -1,84 +1,119 @@
+
+
 {% extends "base.html" %}
 {% block content %}
-<section class="bg-success text-dark p-5 text-center">
-    <div class="container">
-        <center><img src="https://lh3.googleusercontent.com/kJj8i3cnVujP64xU4DlDnCstKp4dHdbfh9tjKMY8cGKf5rZcpXU5Lr9BBJryWhTr3v6lI9xV41GQvYx6L-LUDhu5YmUbWpQwv3UHxirpgZgCch1-zC2webq3LuNirXZxsq8CY8N6KSMMKiYNjpBIKhZXCl-Ru-glUfKojQTdMepLhp9AhJoqYPyKmivyByeJUavzEZLG1ZizM4IeBS1WjS8o359fYPHs7DNxT2T7xjWM_dXfepJVMniWBHGd5sv2YUaH_LuZuAVAAZfsDe7Y23CO69VlUKl_9a91R0_N_qIptF-FNi3TKTcesD_Y2J9j6TtyA-PzTj7M34Xb0HZuL1Ih1CCXT1ypZYvgSMvYzEkf5xMG8CIh1zwSeIOabHFPWwuajvqr7ELonuvs7cKxu4DVszN_x12J8DRxW_7KnebsGfOFDzC7lyUtXGW22jd5dz5BRrdp0nFQ3jdq6WgOSstcdxBTBFD1-cwFLUGqRHK4RIUa-ho5D7E_qzOYvlAa3qnbTwOAOdrLxyIkfOtHQyeJe43s3m2YwFg81MYt0c2Jwfg9DZUC9J5sEgLqJyr8e2tflzyK4JeP1ZMFAW-9kphM2Z6v07_5JTsVLyqC67mF7Ts2Ixvs_3BqWFz2-PLNpM--YN9ZBWU2gHP2xfdp9qCM4diUQ-0twk41XKMslj9VIaV6G2Aqi_J9MYHYOSKDiEQWT5NUB6T2wIz_7l9HmLhqrvkOI2B_to37D-Vp7UoCf_UZzeWR3A4PrKAK1IM4OJLjGiuBaa58RUvsh0d7RvAw6l7KO6hDkJY=s700-no?authuser=0" width="150" height="150" alt="">
-            <br></center>
-        <br>
-        <center><h1> <span class="text-light">
-            User 
-        </span>
-        Registration</h1></center> 
-
-    </div>
-</section>
-<div class="container">
-    <div class="row">
+<section class="h-100 bg-dark">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col">
+          <div class="card card-registration my-4">
+            <div class="row g-0">
+              <div class="col-xl-6 d-none d-xl-block">
+                <img
+                  src="/static/UI/Registration image.webp"
+                  alt="Sample photo"
+                  class="img-fluid"
+                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;"
+                />
+              </div>
+              <div class="col-xl-6">
+                <div class="card-body p-md-5 text-black">
+                  <h3 class="mb-5 text-uppercase">User Registration</h3>
+                  <form action="/" method="post">
+                    <br>
+                    <table class="table">
 
-        </div>
-        <div class="col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-8 col-xxl-6">
-        
-           
-           
-            <form action="/" method="post">
-                <br>
-                <table class="table">
+
+
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <tr>
+                            <td><h5>Name</h5></td>
+                            <td><input name="name" type="text" class="form-control"></td>
+                        </tr>
+                      </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <tr>
+                            <td><h5>Age</h5></td>
+                            <td><input name="age" type="text" class="form-control"></td>
+                        </tr>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <tr>
+                            <td><h5>Gender</h5></td>
+                            <td><div class="input-group">
+                                <select class="form-select" id="inputGroupSelect04" name="gen">
+                                  <option selected>Choose Option</option>
+                                  <option value="1">Male</option>
+                                  <option value="2">Female</option>
+                                  <option value="3">Other</option>
+                                </select>
+                              </div></td>
+                        </tr>
+                        <tr>
+                      </div>
+                    </div>
+
+
+                  <div class="form-outline mb-4">
                     <tr>
-                        <td>Name</td>
-                        <td><input name="name" type="text" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <td>Age</td>
-                        <td><input name="age" type="text" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <td>Gender</td>
-                        <td><div class="input-group">
-                            <select class="form-select" id="inputGroupSelect04" name="gen">
-                              <option selected>Choose Option</option>
-                              <option value="1">Male</option>
-                              <option value="2">Female</option>
-                              <option value="3">Other</option>
-                            </select>
-                          </div></td>
-                    </tr>
-                    <tr>
-                        <td>Address</td>
+                        <td><h5>Address</h5></td>
                         <td>
                             <div class="mb-3">
                             <textarea name="add" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                           </div>
                         </td>
                     </tr>
+                  </div>
+
+
+
+
+                  <div class="form-outline mb-4">
                     <tr>
-                        <td>Email</td>
+                        <td><h5>Email</h5></td>
                         <td><input name="email" type="text" class="form-control"></td>
                     </tr>
+                  </div>
+
+                  <div class="form-outline mb-4">
                     <tr>
-                        <td>Phone Number</td>
+                        <td><h5>Phone Number</h5></td>
                         <td><input name="pno" type="text" class="form-control"></td>
                     </tr>
+                  </div>
+
+                  <div class="form-outline mb-4">
                     <tr>
-                        <td>Password</td>
+                        <td><h5>Password</h5></td>
                         <td><input name="pass" type="password" class="form-control"></td>
                     </tr>
-                    
+                  </div>
+
                 </table>
-                <center><button type="submit" class="btn btn-primary">Register</button></center>
-            </form>
-        </div>
-        <div class="col">
+                <center><button type="submit" class="btn btn-primary"><h6>Register</h6></button></center>
+                <br>
+             
+                <p class="mb-4 pb-lg-2" style="color: #393f81;">Already have an Account &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-info" href="/userlogin"
+                  style="color: #393f81;">Login</a></p>
+              </form>
 
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-</div>
-<br>
-<br>
-
-
-
+  </section>
 
 
 
