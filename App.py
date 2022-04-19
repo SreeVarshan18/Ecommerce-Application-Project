@@ -404,7 +404,7 @@ def Forgot():
 @app.route('/userlogout')
 def user_logout():
     session["name"] = None
-    return redirect('/userlogin')
+    return redirect('/')
 
 
 @app.route('/sellerlogout')
