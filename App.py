@@ -192,7 +192,10 @@ def Buy_cart():
     cursor.execute("INSERT INTO BUY SELECT * FROM CART C WHERE C.USER_ID="+getUid)
     connection.commit()
     print("Inserted into buy")
-    return redirect("/payment")
+    cursor.execute("DELETE FROM CART WHERE USER_ID="+getUid)
+    connection.commit()
+    print("Deleted from cart")
+    return redirect("/dashboard")
 
 @app.route("/payment",methods=['GET','POST'])
 def userr_pay():
@@ -200,11 +203,14 @@ def userr_pay():
     cursor = connection.cursor()
     cursor.execute("SELECT SUM(PRICE) AS PRICE FROM PRODUCT P JOIN CART C ON C.PRODUCT_ID = P.ID WHERE C.USER_ID=" + getUid)
     result1 = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM PRODUCT P JOIN CART C ON C.PRODUCT_ID=P.ID WHERE C.USER_ID=" + getUid)
+    result = cursor.fetchall()
     for i in result1:
         print(i[0])
     Name = getuName
 
-    return render_template("payment.html",total=result1,user=Name)
+    return render_template("payment.html",total=result1,user=Name, cart=result)
 
 
 
@@ -344,9 +350,11 @@ def User_cart_View():
         result = cursor.fetchall()
         cursor.execute("SELECT SUM(PRICE) AS PRICE FROM PRODUCT P JOIN CART C ON C.PRODUCT_ID = P.ID WHERE C.USER_ID="+getUid)
         result1 = cursor.fetchall()
+        if result1 is None:
+            return render_template("cartview.html",total=[],statu=True)
         for i in result1:
             print(i[0])
-        return render_template("cartview.html",cart=result,total=result1,status=True)
+        return render_template("cartview.html",cart=result,total=result1,status=True,statu=False)
 
 
     except Exception as err:
