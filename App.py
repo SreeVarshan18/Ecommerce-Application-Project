@@ -173,15 +173,7 @@ def Add_product():
                     print(err)
     return render_template("add_product.html")
 
-@app.route("/order")
-def Order_Received():
-    getSid = id
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM PRODUCT P JOIN BUY B ON B.PRODUCT_ID = P.ID WHERE P.SELLER_ID="+getSid)
-    result = cursor.fetchall()
-    for i in result:
-        print(i[2])
-    return render_template("order.html",order=result)
+
 
 @app.route("/deletecart",methods=['GET','POST'])
 def Delete_cart():
@@ -252,7 +244,41 @@ def delete_product():
 
 
 
+@app.route("/buy")
+def Buy_cart():
+    getUid = Uid
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO BUY SELECT * FROM CART C WHERE C.USER_ID="+getUid)
+    connection.commit()
+    print("Inserted into buy")
+    cursor.execute("DELETE FROM CART WHERE USER_ID="+getUid)
+    connection.commit()
+    print("Deleted from cart")
+    return redirect("/payment")
 
+@app.route("/payment",methods=['GET','POST'])
+def userr_pay():
+    getUid = Uid
+    cursor = connection.cursor()
+    cursor.execute("SELECT SUM(PRICE) AS PRICE FROM PRODUCT P JOIN CART C ON C.PRODUCT_ID = P.ID WHERE C.USER_ID=" + getUid)
+    result1 = cursor.fetchall()
+    for i in result1:
+        print(i[0])
+    Name = getuName
+
+    return render_template("payment.html",total=result1,user=Name)
+
+
+
+@app.route("/order")
+def Order_Received():
+    getSid = id
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM PRODUCT P JOIN BUY B ON B.PRODUCT_ID = P.ID WHERE P.SELLER_ID="+getSid)
+    result = cursor.fetchall()
+    for i in result:
+        print(i[2])
+    return render_template("order.html",order=result)
 
 
 

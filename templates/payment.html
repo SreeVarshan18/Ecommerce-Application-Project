@@ -585,17 +585,22 @@ Pinterest: https://pinterest.com/mycnlz/
 <div class='subject'>DailyUI #002 </br><strong>Credit Card Checkout</strong></div>
 
 <div class='checkout'>
+   
   <div class='order'>
     <h2>Checkout</h2>
     <h5>Order #0101</h5>
+    {% for i in cart %}
     <ul class='order-list'>
-      <li><img src='http://images.nike.com/is/image/DotCom/PDP_THUMB/JORDAN-ECLIPSE-724010_401_A_PREM.jpg'><h4>Jordan Eclipse</h4><h5>$110</h5></li>
-      <li><img src='http://images.nike.com/is/image/DotCom/PDP_THUMB/Nike-Futura-True-2-Adjustable-Hat-584169_451_A.jpg'><h4>Nike Futura True 2 Snapback</h4><h5>$28</h5></li>
-      <li><img src='http://images.nike.com/is/image/DotCom/PDP_THUMB/NIKE-FB-SHOE-BAG-30-BA5101_001_A.jpg'><h4>Nike FB Training 3.0</h4><h5>$20</h5></li>
+      <li><img src='/static/images/{{i[5]}}'><h4>{{i[2]}}</h4><h5>INR {{i[3]}}</h5></li>
+      
     </ul>
+    {% endfor %}
     <h5>Shipping</h5><h4>$ 9.50</h4>
-    <h5 class='total'>Total</h5><h1>$ 167.50</h1>
+    {% for i in total %}
+    <h5 class='total'>Total</h5><h1>{{i[0]}}</h1>
+    {% endfor %}
   </div>
+  
   <h2>Payment</h2>
   <div id='payment' class='payment'>
     <div class='card'>
