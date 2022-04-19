@@ -211,6 +211,12 @@ def Search_dashboard():
         return render_template("viewall.html", search=[], status=False)
 
 
+
+
+
+
+
+
 @app.route("/update",methods=['GET','POST'])
 def Update_user():
     if request.method == 'POST':
