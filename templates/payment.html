@@ -589,15 +589,16 @@ Pinterest: https://pinterest.com/mycnlz/
   <div class='order'>
     <h2>Checkout</h2>
     <h5>Order #0101</h5>
-    {% for i in cart %}
+    
     <ul class='order-list'>
+        {% for i in cart %}
       <li><img src='/static/images/{{i[5]}}'><h4>{{i[2]}}</h4><h5>INR {{i[3]}}</h5></li>
-      
+      {% endfor %}
     </ul>
-    {% endfor %}
-    <h5>Shipping</h5><h4>$ 9.50</h4>
+    
+    <h5>Shipping</h5><h4>INR 100</h4>
     {% for i in total %}
-    <h5 class='total'>Total</h5><h1>{{i[0]}}</h1>
+    <h5 class='total'>Total</h5><h1>INR {{i[0]}}</h1>
     {% endfor %}
   </div>
   
@@ -697,7 +698,7 @@ Pinterest: https://pinterest.com/mycnlz/
           </svg>
           <input type='text' id='cardcvc' name='cardcvc' placeholder="123" pattern="\d*" title='CVC Code' />
       </p>
-      <button class='button-cta' title='Confirm your purchase'><span>PURCHASE</span></button>
+      <a href="/buy"><button class='button-cta' title='Confirm your purchase'><span>PURCHASE</span></button></a>
     </div>
   </div>
   <div id='paid' class='paid'>

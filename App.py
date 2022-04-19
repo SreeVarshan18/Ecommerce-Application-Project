@@ -11,6 +11,7 @@ table1 = connection.execute("select * from sqlite_master where type = 'table' an
 table2 = connection.execute("select * from sqlite_master where type = 'table' and name = 'USER'").fetchall()
 table3 = connection.execute("select * from sqlite_master where type = 'table' and name = 'PRODUCT'").fetchall()
 table4 = connection.execute("select * from sqlite_master where type = 'table' and name = 'CART'").fetchall()
+table5 = connection.execute("select * from sqlite_master where type = 'table' and name = 'BUY'").fetchall()
 if table1 !=[]:
     print("Seller table already exits")
 else:
@@ -59,6 +60,16 @@ else:
                                 PRODUCT_ID INTEGER,
                                 USER_ID TEXT
 );''')
+
+if table5 !=[]:
+    print("Seller table already exits")
+else:
+    connection.execute('''CREATE TABLE BUY(
+                                ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                PRODUCT_ID INTEGER,
+                                USER_ID TEXT
+);''')
+
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -87,7 +98,7 @@ def User_register():
 
 @app.route("/userlogin",methods=["GET","POST"])
 def User_login():
-    global Uid
+    global Uid,getuName
     if request.method == "POST":
         getEmail = request.form["email"]
         getPass = request.form["pass"]
@@ -256,17 +267,21 @@ def Buy_cart():
     print("Deleted from cart")
     return redirect("/payment")
 
+
 @app.route("/payment",methods=['GET','POST'])
 def userr_pay():
     getUid = Uid
     cursor = connection.cursor()
     cursor.execute("SELECT SUM(PRICE) AS PRICE FROM PRODUCT P JOIN CART C ON C.PRODUCT_ID = P.ID WHERE C.USER_ID=" + getUid)
     result1 = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM PRODUCT P JOIN CART C ON C.PRODUCT_ID=P.ID WHERE C.USER_ID=" + getUid)
+    result = cursor.fetchall()
     for i in result1:
         print(i[0])
     Name = getuName
 
-    return render_template("payment.html",total=result1,user=Name)
+    return render_template("payment.html",total=result1,user=Name, cart=result)
 
 
 
