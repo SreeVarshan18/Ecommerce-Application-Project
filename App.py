@@ -296,6 +296,9 @@ def thanks():
     return render_template("afterPaymet.html")
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
 @app.route("/dashboard")
 def Dashboard():
@@ -401,6 +404,17 @@ def Forgot():
             return render_template("forgotpass.html", status=True)
     else:
         return render_template("forgotpass.html", status=False)
+
+
+@app.route("/userorder")
+def Order_view_User():
+    getUid = Uid
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM PRODUCT P JOIN BUY B ON B.PRODUCT_ID = P.ID WHERE B.USER_ID="+getUid)
+    result = cursor.fetchall()
+    for i in result:
+        print(i[2])
+    return render_template("yourorder.html",view=result)
 
 
 @app.route('/userlogout')
