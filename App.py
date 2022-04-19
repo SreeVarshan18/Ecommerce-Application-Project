@@ -195,7 +195,7 @@ def Buy_cart():
     cursor.execute("DELETE FROM CART WHERE USER_ID="+getUid)
     connection.commit()
     print("Deleted from cart")
-    return redirect("/dashboard")
+    return redirect("/thanks")
 
 @app.route("/payment",methods=['GET','POST'])
 def userr_pay():
@@ -291,7 +291,9 @@ def delete_product():
 
 
 
-
+@app.route("/thanks")
+def thanks():
+    return render_template("afterPaymet.html")
 
 
 
