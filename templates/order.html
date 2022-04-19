@@ -68,13 +68,14 @@ rel="stylesheet"
           <li class="nav-item">
             <a class="nav-link active" href="/viewseller">View Products</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/order">View Order</a>
+          </li>
         </ul>
 
         <div class="d-flex align-items-center">
 
-          <a class="text-reset me-3" href="/cartview">
-            <i class="fas fa-shopping-cart"></i>
-          </a>
+          
 
           <!-- Avatar -->
           <div class="dropdown">
@@ -127,7 +128,7 @@ Not Yet Login
                 <center class="qwer"><h1><span><img src="https://lh3.googleusercontent.com/kJj8i3cnVujP64xU4DlDnCstKp4dHdbfh9tjKMY8cGKf5rZcpXU5Lr9BBJryWhTr3v6lI9xV41GQvYx6L-LUDhu5YmUbWpQwv3UHxirpgZgCch1-zC2webq3LuNirXZxsq8CY8N6KSMMKiYNjpBIKhZXCl-Ru-glUfKojQTdMepLhp9AhJoqYPyKmivyByeJUavzEZLG1ZizM4IeBS1WjS8o359fYPHs7DNxT2T7xjWM_dXfepJVMniWBHGd5sv2YUaH_LuZuAVAAZfsDe7Y23CO69VlUKl_9a91R0_N_qIptF-FNi3TKTcesD_Y2J9j6TtyA-PzTj7M34Xb0HZuL1Ih1CCXT1ypZYvgSMvYzEkf5xMG8CIh1zwSeIOabHFPWwuajvqr7ELonuvs7cKxu4DVszN_x12J8DRxW_7KnebsGfOFDzC7lyUtXGW22jd5dz5BRrdp0nFQ3jdq6WgOSstcdxBTBFD1-cwFLUGqRHK4RIUa-ho5D7E_qzOYvlAa3qnbTwOAOdrLxyIkfOtHQyeJe43s3m2YwFg81MYt0c2Jwfg9DZUC9J5sEgLqJyr8e2tflzyK4JeP1ZMFAW-9kphM2Z6v07_5JTsVLyqC67mF7Ts2Ixvs_3BqWFz2-PLNpM--YN9ZBWU2gHP2xfdp9qCM4diUQ-0twk41XKMslj9VIaV6G2Aqi_J9MYHYOSKDiEQWT5NUB6T2wIz_7l9HmLhqrvkOI2B_to37D-Vp7UoCf_UZzeWR3A4PrKAK1IM4OJLjGiuBaa58RUvsh0d7RvAw6l7KO6hDkJY=s700-no?authuser=0" width="150" height="150" alt=""></span> <span class="text-light">
                     ONESTOP
                 </span>
-                Seller Central</h1></center>
+                Order Received</h1></center>
 
             </div>
         </section>
@@ -148,10 +149,83 @@ Not Yet Login
 <!--              <a class="nav-link active" href="/viewseller">My Inventory</a>-->
 <!--            </li>-->
 <!--    </div>-->
+
+
+
+<div class="container">
+  
+  <div class="row">
+    <div class="col-12">
+		<table class="table table-image">
+		  <thead>
+		    <tr>
+		      <th scope="col">Image</th>
+		      <th scope="col">Product Name</th>
+		      <th scope="col">Category</th>
+		      <th scope="col">Price</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+        {% for i in order %}
+		    <tr>
+           
+		      <td class="w-25">
+			      <img src="/static/images/{{i[5]}}" class="img-fluid img-thumbnail" alt="Sheep">
+		      </td>
+		      <td>{{i[2]}}</td>
+		      <td>{{i[1]}}</td>
+		      <td>₹ {{i[3]}}</td>
+		    </tr>
+        
+        {% endfor %}
+        <tr>
+          {% for i in total %}
+          <td><h3>Total</h3></td>
+          <td>₹ {{i[0]}}</td>
+          {% endfor %}
+        </tr>
+      
+		  </tbody>
+		</table>   
+    </div>
+  </div>
+</div>
+<br><br><br>
+
+<article class="bg-secondary mb-3">  
+  <div class="card-body  text-center ">
+      <img class="artice" src="/static/ui/Blue Yellow White Yacht Logo_page-0001(1).png" width="150" height="150" alt="ONESTOP"><br><br> <h4 class="text-white"> The only stop that you will need in your life. </h4><br>
+  <p class="h5 text-white"> for Ecommerce, marketplace, booking websites 
+  and product landing pages</p>   <br>
+  <p><a class="btn btn-warning" target="_blank" href="http://bootstrap-ecommerce.com/"> Bootstrap-ecommerce.com  
+   <i class="fa fa-window-restore "></i></a></p>
+  </div>
+  <br><br><br>
+  </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
 <div class="container">
     <div class="row mt-3">
                 {% for i in order %}
+
             <div class="col col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+
 
                 <div class="card text-white bg-dark mb-3 mr-auto" style="width: 18rem;">
                    <div class="qw"><img src="/static/images/{{i[5]}}" class="card-img-top" alt=""  width="200" height="200"><span class="badge badge-warning">New</span></div>
@@ -176,7 +250,7 @@ Not Yet Login
 
         </div>
 
-    </div>
+    </div> -->
 
 
 

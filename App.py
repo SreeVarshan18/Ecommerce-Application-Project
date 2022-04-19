@@ -78,7 +78,7 @@ Session(app)
 
 app.config['UPLOAD_FOLDER'] = "static\images"
 
-@app.route("/",methods=["GET","POST"])
+@app.route("/userreg",methods=["GET","POST"])
 def User_register():
     if request.method == "POST":
         getName = request.form["name"]
@@ -93,11 +93,11 @@ def User_register():
                             '"+getAddress+"','"+getPass+"')")
         connection.commit()
         print("Customer details inserted successfully")
-        return redirect('/userlogin')
+        return redirect('/')
 
     return render_template("userregister.html")
 
-@app.route("/userlogin",methods=["GET","POST"])
+@app.route("/",methods=["GET","POST"])
 def User_login():
     global Uid,getuName
     if request.method == "POST":
@@ -220,9 +220,13 @@ def Order_Received():
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM PRODUCT P JOIN BUY B ON B.PRODUCT_ID = P.ID WHERE P.SELLER_ID="+getSid)
     result = cursor.fetchall()
+    cursor.execute("SELECT SUM(PRICE) AS PRICE FROM PRODUCT P JOIN BUY B ON B.PRODUCT_ID = P.ID WHERE P.SELLER_ID="+getSid)
+    result1 = cursor.fetchall()
+    for i in result1:
+        print(i[0])
     for i in result:
         print(i[2])
-    return render_template("order.html",order=result)
+    return render_template("order.html",order=result,total=result1)
 
 @app.route("/deletecart",methods=['GET','POST'])
 def Delete_cart():
