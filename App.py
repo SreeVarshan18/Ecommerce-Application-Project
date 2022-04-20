@@ -284,7 +284,7 @@ def delete_product():
         getName = request.form["name"]
         connection.execute("DELETE FROM PRODUCT WHERE NAME='" + getName + "' ")
         connection.commit()
-        return redirect('/addproduct')
+        return redirect('/viewseller')
 
 
     return render_template("delete_product.html")
