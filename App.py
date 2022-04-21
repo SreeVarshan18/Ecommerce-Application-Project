@@ -303,19 +303,31 @@ def AdminLogin():
     return render_template("adminlogin.html")
 
 
+
 @app.route("/adminseller")
 def AdminSeller():
-    getSid = id
     cursor = connection.cursor()
     query = "SELECT * FROM SELLER"
     cursor.execute(query)
     result = cursor.fetchall()
-    query2 = "SELECT SELLER_NAME FROM SELLER"
-    cursor.execute(query2)
-    result1 = cursor.fetchall()
-    cursor.execute("SELECT SUM(PRICE) AS PRICE FROM PRODUCT P JOIN BUY B ON B.PRODUCT_ID = P.ID WHERE P.SELLER_ID="+getSid)
+    cursor.execute("SELECT SUM(PRICE) AS PRICE FROM PRODUCT P JOIN BUY B ON B.PRODUCT_ID = P.ID GROUP BY P.SELLER_ID")
     result2 = cursor.fetchall()
-    return render_template("adminseller.html", sel=result, name=result1, total1=result2)
+    for i in result2:
+        print(i[0])
+    return render_template("adminseller.html", sel=result, total1=result2)
+
+
+
+@app.route("/deleteseller")
+def Delete_seller():
+    getSid = request.args.get("id")
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM SELLER WHERE ID="+getSid)
+    connection.commit()
+    print("Deleted Seller Successfully")
+    return redirect("/adminseller")
+
+
 
 
 @app.route("/sellerupdate",methods=['GET','POST'])
