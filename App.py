@@ -139,7 +139,7 @@ def Seller_register():
         getAcc = request.form["ano"]
         getIfsc = request.form["ifsc"]
         cursor = connection.cursor()
-        query = "SELECT * FROM USER WHERE CUST_EMAIL='" + getEmail + "'"
+        query = "SELECT * FROM SELLER WHERE SELLER_EMAIL='" + getEmail + "'"
         result = cursor.execute(query).fetchall()
         if len(result) > 0:
             return render_template("seller_register.html", status=True)
@@ -328,6 +328,26 @@ def Delete_seller():
     return redirect("/adminseller")
 
 
+
+@app.route("/deleteuser")
+def Delete_user():
+    getUid = request.args.get("id")
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM USER WHERE ID="+getUid)
+    connection.commit()
+    print("Deleted User Successfully")
+    return redirect("/adminuser")
+
+
+
+
+@app.route("/adminuser")
+def AdminUser():
+    cursor = connection.cursor()
+    query = "SELECT * FROM USER"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    return render_template("adminuser.html", user=result)
 
 
 @app.route("/sellerupdate",methods=['GET','POST'])
