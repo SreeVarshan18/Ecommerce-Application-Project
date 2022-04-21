@@ -180,6 +180,20 @@ Not Yet Login
 		      <center><td><h4>{{i[2]}}</h4></td></center>
 		      <center><td><h4>{{i[1]}}</h4></td></center>
 		      <center><td><h4>₹ {{i[3]}}</h4></td></center>
+          <center><td>
+            <div class="dropdown">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Status
+              </a>
+            
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Dispatched</a></li>
+                <li><a class="dropdown-item" href="#">Out for Delivery</a></li>
+                <li><a class="dropdown-item" href="#">Delivered</a></li>
+              </ul>
+            </div>
+          </td></center>
+          
 		    </tr>
         
         {% endfor %}
@@ -188,14 +202,7 @@ Not Yet Login
           <td><h2>Total</h2></td>
           <td><h3>₹ {{i[0]}}</h3></td>
           {% endfor %}
-          <td>
-            <center>
-              <button type = "button" class = "btn btn-outline-primary">Dispatched</button>
-           
-           
-            </center>
-          </td>
-          <td><center> <button type = "button" class = "btn btn-success">Delivered</button></center></td>
+          
         </tr>
       
 		  </tbody>
