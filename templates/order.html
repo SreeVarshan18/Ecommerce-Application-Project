@@ -181,17 +181,16 @@ Not Yet Login
 		      <center><td><h4>{{i[1]}}</h4></td></center>
 		      <center><td><h4>₹ {{i[3]}}</h4></td></center>
           <center><td>
-            <div class="dropdown">
-              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                Status
-              </a>
-            
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="#">Dispatched</a></li>
-                <li><a class="dropdown-item" href="#">Out for Delivery</a></li>
-                <li><a class="dropdown-item" href="#">Delivered</a></li>
-              </ul>
+            <form action="" method="post">
+            <div class="input-group mb-3">
+              <select class="form-select" id="inputGroupSelect02">
+                <option selected>Status</option>
+                <option value="1">Dispatched</option>
+                <option value="2">Out for Delivery</option>
+                <option value="3">Delivered</option>
+              </select>
             </div>
+          </form>
           </td></center>
           
 		    </tr>
