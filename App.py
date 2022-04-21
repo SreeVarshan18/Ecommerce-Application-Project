@@ -88,14 +88,23 @@ def User_register():
         getNumber = request.form["pno"]
         getAddress = request.form["add"]
         getPass = request.form["pass"]
-        connection.execute("INSERT INTO USER(CUST_NAME,CUST_EMAIL,CUST_GENDER,CUST_AGE,CUST_NUMBER,CUST_ADDRESS,CUST_PASSWORD)\
+        cursor = connection.cursor()
+        query = "SELECT * FROM USER WHERE CUST_EMAIL='" + getEmail + "'"
+        result = cursor.execute(query).fetchall()
+        if len(result) > 0:
+            return render_template("userregister.html", status=True)
+        else:
+            cursor.execute("INSERT INTO USER(CUST_NAME,CUST_EMAIL,CUST_GENDER,CUST_AGE,CUST_NUMBER,CUST_ADDRESS,CUST_PASSWORD)\
                             VALUES('"+getName+"','"+getEmail+"','"+getGender+"',"+getAge+","+getNumber+",\
                             '"+getAddress+"','"+getPass+"')")
-        connection.commit()
-        print("Customer details inserted successfully")
-        return redirect('/')
+            cursor.connection.commit()
+            print("Customer details inserted successfully")
+            return redirect('/')
+    else:
+        return render_template("userregister.html", status=False)
 
-    return render_template("userregister.html")
+
+
 
 @app.route("/",methods=["GET","POST"])
 def User_login():
@@ -129,12 +138,19 @@ def Seller_register():
         getNumber = request.form["pno"]
         getAcc = request.form["ano"]
         getIfsc = request.form["ifsc"]
-        connection.execute("INSERT INTO SELLER(SELLER_NAME,SELLER_EMAIL,SELLER_PASSWORD,SELLER_NUMBER,SELLER_ACC,SELLER_IFSC)\
-                           VALUES('"+getName+"','"+getEmail+"','"+getPass+"',"+getNumber+","+getAcc+",'"+getIfsc+"')")
-        connection.commit()
-        print("Seller details inserted successfully")
-        return redirect('/sellerlogin')
-    return render_template("seller_register.html")
+        cursor = connection.cursor()
+        query = "SELECT * FROM USER WHERE CUST_EMAIL='" + getEmail + "'"
+        result = cursor.execute(query).fetchall()
+        if len(result) > 0:
+            return render_template("seller_register.html", status=True)
+        else:
+            cursor.execute("INSERT INTO SELLER(SELLER_NAME,SELLER_EMAIL,SELLER_PASSWORD,SELLER_NUMBER,SELLER_ACC,SELLER_IFSC)\
+                                       VALUES('" + getName + "','" + getEmail + "','" + getPass + "'," + getNumber + "," + getAcc + ",'" + getIfsc + "')")
+            cursor.connection.commit()
+            print("Seller details inserted successfully")
+            return redirect('/sellerlogin')
+    else:
+        return render_template("seller_register.html", status=False)
 
 @app.route("/sellerlogin",methods=['GET','POST'])
 def Seller_Login():
@@ -216,6 +232,7 @@ def userr_pay():
 
 @app.route("/order")
 def Order_Received():
+    global total
     getSid = id
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM PRODUCT P JOIN BUY B ON B.PRODUCT_ID = P.ID WHERE P.SELLER_ID="+getSid)
@@ -276,6 +293,48 @@ def Update_user():
     return render_template("updateUser.html")
 
 
+@app.route("/admin",methods=['GET','POST'])
+def AdminLogin():
+    if request.method == 'POST':
+        getName = request.form["name"]
+        getPass = request.form["pass"]
+        if getName == "admin" and getPass == "12345":
+            return redirect('/adminseller')
+    return render_template("adminlogin.html")
+
+
+@app.route("/adminseller")
+def AdminSeller():
+    getSid = id
+    cursor = connection.cursor()
+    query = "SELECT * FROM SELLER"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    query2 = "SELECT SELLER_NAME FROM SELLER"
+    cursor.execute(query2)
+    result1 = cursor.fetchall()
+    cursor.execute("SELECT SUM(PRICE) AS PRICE FROM PRODUCT P JOIN BUY B ON B.PRODUCT_ID = P.ID WHERE P.SELLER_ID="+getSid)
+    result2 = cursor.fetchall()
+    return render_template("adminseller.html", sel=result, name=result1, total1=result2)
+
+
+@app.route("/sellerupdate",methods=['GET','POST'])
+def Update_seller():
+    if request.method == 'POST':
+        getSid = id
+        getName = request.form["name"]
+        getEmail = request.form["email"]
+        getPass = request.form["pass"]
+        getNumber = request.form["pno"]
+        getAcc = request.form["ano"]
+        getIfsc = request.form["ifsc"]
+        connection.execute("UPDATE SELLER SET SELLER_NAME='"+getName+"',SELLER_EMAIL='"+getEmail +"',SELLER_PASSWORD='"+getPass+"',\
+        SELLER_NUMBER="+getNumber+",SELLER_ACC="+getAcc+",SELLER_IFSC='"+getIfsc+"' WHERE ID="+getSid)
+        connection.commit()
+        print("Updated User Details")
+        return redirect("/viewseller")
+
+    return render_template("sellerupdate.html")
 
 
 @app.route("/deleteproduct",methods=['GET','POST'])

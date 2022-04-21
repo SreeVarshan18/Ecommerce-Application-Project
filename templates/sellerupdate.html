@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "sellerbase.html" %}
 {% block content %}
 
 <section class="vh-100 bg-image" style="background-image: url('/static/ui/bg\ image.jpg');">
@@ -10,8 +10,8 @@
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-1">
                   <br>
-                <h2 class="text-uppercase text-center mb-5">Seller Registration</h2>
-                <form action="/sellerregister" method="post">
+                <h2 class="text-uppercase text-center mb-5">Seller Edit</h2>
+                <form action="/sellerupdate" method="post">
                 <table class="table">
 
                   <div class="form-outline mb-4">
@@ -58,16 +58,10 @@
 
                 </table>
                 <div class="d-flex justify-content-center">
-                <center><button type="submit" class="btn btn-primary">Register</button></center>
+                <center><button type="submit" class="btn btn-primary">Update</button></center>
+                <br>
+                <br>
                 </div>
-                <br>
-                {% if status %}
-                <br>
-                <center><h5 style="color: red;">Email ID Already Exist</h5></center>
-                <br>
-                {% endif %}
-                <center><p class="mb-4 pb-lg-2" style="color: #393f81;">Already have an Account &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-info" href="/sellerlogin"
-                    style="color: #393f81;">Login</a></p></center>
 
             </form>
 

@@ -102,6 +102,11 @@
                 <br><br>
                 <center><button name="reg" type="submit" class="btn btn-primary"><h6>Register</h6></button></center>
                 <br>
+                {% if status %}
+                <br>
+                <center><h5 style="color: red;">Email ID Already Exist</h5></center>
+                <br>
+                {% endif %}
              <br><br>
                 <center><p class="mb-4 pb-lg-2" style="color: #393f81;">Already have an Account &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-info" href="/"
                     style="color: #393f81;">Login</a></p></center>
