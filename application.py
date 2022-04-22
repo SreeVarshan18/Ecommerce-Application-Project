@@ -71,14 +71,14 @@ else:
     print("Buy table created")
 
 
-app = Flask(__name__)
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
+application = Flask(__name__)
+application.config["SESSION_PERMANENT"] = False
+application.config["SESSION_TYPE"] = "filesystem"
+Session(application)
 
-app.config['UPLOAD_FOLDER'] = "static\images"
+application.config['UPLOAD_FOLDER'] = "static\images"
 
-@app.route("/userreg",methods=["GET","POST"])
+@application.route("/userreg", methods=["GET", "POST"])
 def User_register():
     if request.method == "POST":
         getName = request.form["name"]
@@ -106,7 +106,7 @@ def User_register():
 
 
 
-@app.route("/",methods=["GET","POST"])
+@application.route("/", methods=["GET", "POST"])
 def User_login():
     global Uid,getuName
     if request.method == "POST":
@@ -129,7 +129,7 @@ def User_login():
     else:
         return render_template("userlogin.html", status=False)
 
-@app.route("/sellerregister",methods=['GET','POST'])
+@application.route("/sellerregister", methods=['GET', 'POST'])
 def Seller_register():
     if request.method == "POST":
         getName = request.form["name"]
@@ -152,7 +152,7 @@ def Seller_register():
     else:
         return render_template("seller_register.html", status=False)
 
-@app.route("/sellerlogin",methods=['GET','POST'])
+@application.route("/sellerlogin", methods=['GET', 'POST'])
 def Seller_Login():
     global id
     if request.method == "POST":
@@ -174,7 +174,7 @@ def Seller_Login():
     else:
         return render_template("seller_login.html", status=False)
 
-@app.route("/addproduct",methods=['GET','POST'])
+@application.route("/addproduct", methods=['GET', 'POST'])
 def Add_product():
     if not session.get("name"):
         return redirect('/sellerlogin')
@@ -182,7 +182,7 @@ def Add_product():
         if request.method == "POST":
             upload_image = request.files["image"]
             if upload_image != '':
-                filepath = os.path.join(app.config['UPLOAD_FOLDER'], upload_image.filename)
+                filepath = os.path.join(application.config['UPLOAD_FOLDER'], upload_image.filename)
                 upload_image.save(filepath)
 
                 getCat = request.form.get("cat")
@@ -201,7 +201,7 @@ def Add_product():
                     print(err)
     return render_template("add_product.html")
 
-@app.route("/buy")
+@application.route("/buy")
 def Buy_cart():
     getUid = Uid
     cursor = connection.cursor()
@@ -213,7 +213,7 @@ def Buy_cart():
     print("Deleted from cart")
     return redirect("/thanks")
 
-@app.route("/payment",methods=['GET','POST'])
+@application.route("/payment", methods=['GET', 'POST'])
 def userr_pay():
     getUid = Uid
     cursor = connection.cursor()
@@ -230,7 +230,7 @@ def userr_pay():
 
 
 
-@app.route("/order")
+@application.route("/order")
 def Order_Received():
     global total
     getSid = id
@@ -245,7 +245,7 @@ def Order_Received():
         print(i[2])
     return render_template("order.html",order=result,total=result1)
 
-@app.route("/deletecart",methods=['GET','POST'])
+@application.route("/deletecart", methods=['GET', 'POST'])
 def Delete_cart():
     try:
         getPid = request.args.get('id')
@@ -261,7 +261,7 @@ def Delete_cart():
 
 
 
-@app.route("/search",methods=['GET','POST'])
+@application.route("/search", methods=['GET', 'POST'])
 def Search_dashboard():
     if request.method == 'POST':
         getName = request.form["sea"]
@@ -273,7 +273,7 @@ def Search_dashboard():
         return render_template("viewall.html", search=[], status=False)
 
 
-@app.route("/update",methods=['GET','POST'])
+@application.route("/update", methods=['GET', 'POST'])
 def Update_user():
     if request.method == 'POST':
         getUid = Uid
@@ -293,7 +293,7 @@ def Update_user():
     return render_template("updateUser.html")
 
 
-@app.route("/admin",methods=['GET','POST'])
+@application.route("/admin", methods=['GET', 'POST'])
 def AdminLogin():
     if request.method == 'POST':
         getName = request.form["name"]
@@ -304,7 +304,7 @@ def AdminLogin():
 
 
 
-@app.route("/adminseller")
+@application.route("/adminseller")
 def AdminSeller():
     cursor = connection.cursor()
     query = "SELECT * FROM SELLER"
@@ -318,7 +318,7 @@ def AdminSeller():
 
 
 
-@app.route("/deleteseller")
+@application.route("/deleteseller")
 def Delete_seller():
     getSid = request.args.get("id")
     cursor = connection.cursor()
@@ -329,7 +329,7 @@ def Delete_seller():
 
 
 
-@app.route("/deleteuser")
+@application.route("/deleteuser")
 def Delete_user():
     getUid = request.args.get("id")
     cursor = connection.cursor()
@@ -341,7 +341,7 @@ def Delete_user():
 
 
 
-@app.route("/adminuser")
+@application.route("/adminuser")
 def AdminUser():
     cursor = connection.cursor()
     query = "SELECT * FROM USER"
@@ -350,7 +350,7 @@ def AdminUser():
     return render_template("adminuser.html", user=result)
 
 
-@app.route("/sellerupdate",methods=['GET','POST'])
+@application.route("/sellerupdate", methods=['GET', 'POST'])
 def Update_seller():
     if request.method == 'POST':
         getSid = id
@@ -369,7 +369,7 @@ def Update_seller():
     return render_template("sellerupdate.html")
 
 
-@app.route("/deleteproduct",methods=['GET','POST'])
+@application.route("/deleteproduct", methods=['GET', 'POST'])
 def delete_product():
     if request.method == 'POST':
         getName = request.form["name"]
@@ -382,16 +382,16 @@ def delete_product():
 
 
 
-@app.route("/thanks")
+@application.route("/thanks")
 def thanks():
     return render_template("afterPaymet.html")
 
 
-@app.route("/about")
+@application.route("/about")
 def about():
     return render_template("about.html")
 
-@app.route("/dashboard")
+@application.route("/dashboard")
 def Dashboard():
 
         cursor = connection.cursor()
@@ -427,7 +427,7 @@ def Dashboard():
         result10 = cursor.fetchall()
         return render_template("viewall.html",mc=result1, tae=result2, mf=result3, wf=result4, hk=result5, bh=result6, sf=result7, tb=result8, ca=result9, b=result10, sta=True)
 
-@app.route("/cart")
+@application.route("/cart")
 def User_cart():
     try:
         getPid = request.args.get('id')
@@ -441,7 +441,7 @@ def User_cart():
         print(err)
     return redirect('/cartview')
 
-@app.route("/cartview")
+@application.route("/cartview")
 def User_cart_View():
     try:
         getUid = Uid
@@ -461,7 +461,7 @@ def User_cart_View():
         print(err)
     return render_template("cartview.html",cart=[],status=False)
 
-@app.route("/viewexpand")
+@application.route("/viewexpand")
 def View_expand():
     getid = request.args.get('id')
     cursor = connection.cursor()
@@ -469,7 +469,7 @@ def View_expand():
     result = cursor.fetchall()
     return render_template("viewexpand.html",product=result)
 
-@app.route("/viewseller")
+@application.route("/viewseller")
 def viewSeller():
     getId = id
     cursor = connection.cursor()
@@ -478,7 +478,7 @@ def viewSeller():
     return render_template("viewseller.html", sellers=result)
 
 
-@app.route("/forgot",methods=['GET','POST'])
+@application.route("/forgot", methods=['GET', 'POST'])
 def Forgot():
     if request.method == "POST":
         getEmail = request.form["email"]
@@ -497,7 +497,7 @@ def Forgot():
         return render_template("forgotpass.html", status=False)
 
 
-@app.route("/userorder")
+@application.route("/userorder")
 def Order_view_User():
     getUid = Uid
     cursor = connection.cursor()
@@ -508,16 +508,16 @@ def Order_view_User():
     return render_template("yourorder.html",view=result)
 
 
-@app.route('/userlogout')
+@application.route('/userlogout')
 def user_logout():
     session["name"] = None
     return redirect('/')
 
 
-@app.route('/sellerlogout')
+@application.route('/sellerlogout')
 def seller_logout():
     session["name"] = None
     return redirect('/sellerlogin')
 
 if __name__ == ("__main__"):
-    app.run(debug=True)
+    application.run(debug=True)
