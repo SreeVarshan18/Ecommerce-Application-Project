@@ -1,0 +1,126 @@
+{% extends "sellerbase.html" %}
+{% block content %}
+
+
+<!--        <div class="topnav">-->
+<!--            <div class="topnav-right">-->
+<!--                <button class="btn btn-danger pull-right"><a class="text-light" href="/sellerlogin">Logout</a></button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        <div class="topnav">-->
+<!--        <ul class="nav nav-tabs">-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link active" aria-current="page" href="/addproduct">Add Products</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="/deleteproduct">Delete Products</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="/viewseller">My Inventory</a>-->
+<!--            </li>-->
+<!--    </div>-->
+        <section class="bg-success text-dark text-center backy p-3">
+            <div class="container-fluid">
+                <!-- <center><img src="https://lh3.googleusercontent.com/kJj8i3cnVujP64xU4DlDnCstKp4dHdbfh9tjKMY8cGKf5rZcpXU5Lr9BBJryWhTr3v6lI9xV41GQvYx6L-LUDhu5YmUbWpQwv3UHxirpgZgCch1-zC2webq3LuNirXZxsq8CY8N6KSMMKiYNjpBIKhZXCl-Ru-glUfKojQTdMepLhp9AhJoqYPyKmivyByeJUavzEZLG1ZizM4IeBS1WjS8o359fYPHs7DNxT2T7xjWM_dXfepJVMniWBHGd5sv2YUaH_LuZuAVAAZfsDe7Y23CO69VlUKl_9a91R0_N_qIptF-FNi3TKTcesD_Y2J9j6TtyA-PzTj7M34Xb0HZuL1Ih1CCXT1ypZYvgSMvYzEkf5xMG8CIh1zwSeIOabHFPWwuajvqr7ELonuvs7cKxu4DVszN_x12J8DRxW_7KnebsGfOFDzC7lyUtXGW22jd5dz5BRrdp0nFQ3jdq6WgOSstcdxBTBFD1-cwFLUGqRHK4RIUa-ho5D7E_qzOYvlAa3qnbTwOAOdrLxyIkfOtHQyeJe43s3m2YwFg81MYt0c2Jwfg9DZUC9J5sEgLqJyr8e2tflzyK4JeP1ZMFAW-9kphM2Z6v07_5JTsVLyqC67mF7Ts2Ixvs_3BqWFz2-PLNpM--YN9ZBWU2gHP2xfdp9qCM4diUQ-0twk41XKMslj9VIaV6G2Aqi_J9MYHYOSKDiEQWT5NUB6T2wIz_7l9HmLhqrvkOI2B_to37D-Vp7UoCf_UZzeWR3A4PrKAK1IM4OJLjGiuBaa58RUvsh0d7RvAw6l7KO6hDkJY=s700-no?authuser=0" width="150" height="150" alt="">
+                    <br></center> -->
+                <br>
+                <center><h1><span><img src="/static/ui/Blue Yellow White Yacht Logo_page-0001(1).png" width="150" height="150" alt=""></span> <span class="text-light">
+                    ONESTOP 
+                </span>
+                Seller Central</h1></center> 
+        
+            </div>
+        </section>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-8 col-xxl-8">
+          
+            <form action="/addproduct" method="post" enctype="multipart/form-data">
+                <br>
+                <table class="table">
+                    <tr>
+                        <td>Name</td>
+                        <td><input name="name" type="text" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td><div class="input-group">
+                            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="cat">
+                              <option selected>Choose Product type</option>
+                              <option value="Mobile/computers">Mobile/computers</option>
+                              <option value="TV/Appliances/electronics">TV/Appliances/electronics</option>
+                              <option value="Men’s Fashion">Men’s Fashion</option>
+                              <option value="Women’s Fashion">Women’s Fashion</option>
+                              <option value="Home/Kitchen">Home/Kitchen</option>
+                              <option value="Beauty/Health">Beauty/Health</option>
+                              <option value="Sports/Fitness">Sports/Fitness</option>
+                              <option value="Toys/Baby Products">Toys/Baby Products</option>
+                              <option value="Car/Automobile">Car/Automobile</option>
+                              <option value="Books">Books</option>
+                            </select>
+                          </div></td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td><input name="price" type="text" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td>Features</td>
+                        <td>
+                            <div class="mb-3">
+                            <textarea name="fea" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                          </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Images</td>
+                        <td><div class="input-group">
+                            <input type="file" name="image" class="form-control">
+                          </div></td>
+                    </tr>
+
+                    
+                </table>
+                <center><button type="submit" class="btn btn-primary">Push to Inventory</button></center>
+            </form>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+
+</div>
+<br>
+{% if status %}
+
+<center><h5 style="color: rgb(15, 222, 15);">Added Successfully</h5></center>
+
+{% endif %}
+<br>
+<br><br><br>
+
+<article class="bg-secondary mb-3">  
+  <div class="card-body  text-center ">
+      <img class="artice" src="/static/ui/Blue Yellow White Yacht Logo_page-0001(1).png" width="150" height="150" alt="ONESTOP"><br><br> <h4 class="text-white"> The only stop that you will need in your life. </h4><br>
+  <p class="h5 text-white"> for Ecommerce, marketplace, booking websites 
+  and product landing pages</p>   <br>
+  <p><a class="btn btn-warning" target="_blank" href="/about"> About Us
+   <i class="fa fa-window-restore "></i></a></p>
+  </div>
+  <br><br><br>
+  </article>
+
+
+{% endblock %}
+<!--<script-->
+<!--  type="text/javascript"-->
+<!--  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"-->
+<!--&gt;</script>-->
+<!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>-->
+<!--</body>-->
+<!--</html>-->

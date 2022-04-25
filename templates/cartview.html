@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!------ Include the above in your HEAD tag ---------->
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  <link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
+rel="stylesheet"
+/>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+<style>
+
+.param {
+    margin-bottom: 7px;
+    line-height: 1.4;
+}
+.param-inline dt {
+    display: inline-block;
+}
+.param dt {
+    margin: 0;
+    margin-right: 7px;
+    font-weight: 600;
+}
+.param-inline dd {
+    vertical-align: baseline;
+    display: inline-block;
+}
+
+.param dd {
+    margin: 0;
+    vertical-align: baseline;
+} 
+
+.shopping-cart-wrap .price {
+    color: #007bff;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 5px;
+    display: block;
+}
+var {
+    font-style: normal;
+}
+
+.media img {
+    margin-right: 1rem;
+}
+.img-sm {
+    width: 90px;
+    max-height: 75px;
+    object-fit: cover;
+}
+
+
+.total{
+  margin-left: 50rem;
+}
+</style>
+
+</head>
+<body>
+    <div>
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+
+            <img src="/static/ui/logo onestp.png" width="50" height="50" alt="ONESTOP">
+
+          <a class="navbar-brand" href="#">&nbsp;&nbsp;ONESTOP</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+
+              <li class="nav-item">
+                <a class="nav-link" href="/dashboard">Go Back</a>
+              </li>
+            </ul>
+
+            <div class="d-flex align-items-center">
+
+
+
+              <!-- Avatar -->
+              <div class="dropdown">
+                <a
+                  class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                  href="#"
+                  id="navbarDropdownMenuAvatar"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    class="rounded-circle"
+                    height="45"
+                    alt="Black and White Portrait of a Man"
+                    loading="lazy"
+                  />
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu-end"
+                  aria-labelledby="navbarDropdownMenuAvatar"
+                > {% if session.name %}
+                  <li>
+                    <a class="dropdown-item" href="/update">{{session.name}}</a>
+                  </li>
+                  {% else %}
+    Not Yet Login
+    {% endif %}
+                  <li>
+                    <a class="dropdown-item" href="/userorder">Settings</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/userlogout">Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- Right elements -->
+
+          </div>
+        </div>
+
+      </nav>
+
+
+
+
+
+      
+      
+      <div class="container">
+        <br>
+    <section class="bg-success text-dark p-2 text-center">
+        <div class="container">
+            <center><h1> <span class="text-light">
+                CART
+            </span>
+             </h1></center>  
+    
+        </div>
+    </section>
+      <hr>
+      
+      
+      
+      <div class="card">
+        {% for i in cart %}
+        <form action="/" method="post">
+      <table class="table table-hover shopping-cart-wrap">
+      <thead class="text-muted">
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col" width="120">Quantity</th>
+        <th scope="col" width="120">Price</th>
+        <th scope="col" width="200" class="text-right">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+      <figure class="media">
+        <div class="img-wrap"><img src="/static/images/{{i[5]}}" class="img-thumbnail img-sm"></div>
+        <figcaption class="media-body">
+          <h6 class="title text-truncate">{{i[2]}} </h6>
+          <dl class="param param-inline small">
+            <dt>Category: </dt>
+            <dd>{{i[1]}}</dd>
+          </dl>
+          
+        </figcaption>
+      </figure> 
+        </td>
+        <td> 
+          <select class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>	
+            <option value="3">3</option>	
+            <option value="4">4</option>	
+          </select> 
+        </td>
+        <td> 
+          <div class="price-wrap"> 
+            <var class="price">INR {{i[3]}}</var> 
+            <small class="text-muted">(INR each)</small> 
+          </div> <!-- price-wrap .// -->
+        </td>
+        <td class="text-right"> 
+        <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip" data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i></a> 
+        <a href="/deletecart?id={{i[0]}}" class="btn btn-outline-danger"> × Remove</a>
+        </td>
+      </tr>
+     
+      
+      </tbody>
+     
+        
+     
+      </table>
+    </form>
+    {% endfor %}
+    <br>
+    
+    
+    {% for i in total %}
+        <center><h3 class="text-black total">Total Amount:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{i[0]}}</h3></center>
+        {% endfor %}
+        {% if statu %}
+        
+        {% endif %}
+        <br>
+        <br>
+        <center><a href="/payment"><button class="btn btn-success" >Proceed to Payment</button></a></center>
+        <br><br><br>
+      </div> <!-- card.// -->
+      <br>
+      
+      </div> 
+      <!--container end.//-->
+      
+      <br><br><br>
+      <article class="bg-secondary mb-3">  
+        <div class="card-body  text-center ">
+            <img class="artice" src="/static/ui/Blue Yellow White Yacht Logo_page-0001(1).png" width="150" height="150" alt="ONESTOP"><br><br> <h4 class="text-white"> The only stop that you will need in your life. </h4><br>
+        <p class="h5 text-white"> for Ecommerce, marketplace, booking websites 
+        and product landing pages</p>   <br>
+        <p><a class="btn btn-warning" target="_blank" href="/about"> About Us
+         <i class="fa fa-window-restore "></i></a></p>
+        </div>
+        <br><br><br>
+        </article>
+
+
+
+
+
+
+<!-- 
+
+
+<div class="container">
+    <div class="row">
+        {% for i in cart %}
+        <div class="col col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+            <br>
+            <center>
+                <div class="card" style="width: 18rem;">
+                    <img src="/static/images/{{i[5]}}" class="card-img-top" width="200px" height="300px" alt="..." >
+                    <div class="card-body">
+                        <center> <h5 class="card-title"><a style="color:black; font-size:25px; text-decoration:none;" href="/viewexpand?id={{i[0]}}">{{i[2]}}</a></h5></center>
+
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">{{i[1]}}</li>
+                      <li class="list-group-item">Rs.{{i[3]}}</li>
+                    </ul>
+                    
+                  </div>
+            </center>
+            <br><br>
+        </div>
+        
+        {% endfor %}
+        <br>
+        <br>
+        {% for i in total %}
+
+        <center><h4>Total Amount:</h4> {{i[0]}}</center>
+        
+        
+                
+        {% endfor %}
+       
+          <br><br>
+        <button class="btn btn-outline-info">Buy Now</button>
+        
+        
+
+        
+    </div>
+    
+</div>
+ -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"
+></script>
+</body>
+</html>

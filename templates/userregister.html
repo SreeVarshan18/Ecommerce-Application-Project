@@ -1,0 +1,126 @@
+
+
+{% extends "base.html" %}
+{% block content %}
+<section class="h-100 gradient-custom-3">
+    <div class="container py-5 h-100 ">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card card-registration my-4" style="border-radius: 1rem;">
+            <div class="row g-0 ">
+              <div class="col-xl-6 d-none d-xl-block h-100">
+                <img
+                  src="/static/ui/user regiter.jpg"
+                  alt="Sample photo"
+                  class="img-fluid"
+                  style="border-top-left-radius: 1rem; border-bottom-left-radius: 1rem;"
+                />
+              </div>
+              <div class="col-xl-6">
+                <div class="card-body p-md-5 text-black">
+                  <h3 class="mb-5 text-uppercase">User Registration</h3>
+                  <form action="/userreg" method="post">
+                    <br>
+                    <table class="table">
+
+
+
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <tr>
+                            <td><h5>Name</h5></td>
+                            <td><input name="name" type="text" class="form-control"></td>
+                        </tr>
+                      </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <tr>
+                            <td><h5>Age</h5></td>
+                            <td><input name="age" type="text" class="form-control"></td>
+                        </tr>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <tr>
+                            <td><h5>Gender</h5></td>
+                            <td><div class="input-group">
+                                <select class="form-select" id="inputGroupSelect04" name="gen">
+                                  <option selected>Choose Option</option>
+                                  <option value="1">Male</option>
+                                  <option value="2">Female</option>
+                                  <option value="3">Other</option>
+                                </select>
+                              </div></td>
+                        </tr>
+                        <tr>
+                      </div>
+                    </div>
+
+
+                  <div class="form-outline mb-4">
+                    <tr>
+                        <td><h5>Address</h5></td>
+                        <td>
+                            <div class="mb-3">
+                            <textarea name="add" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                          </div>
+                        </td>
+                    </tr>
+                  </div>
+
+
+
+
+                  <div class="form-outline mb-4">
+                    <tr>
+                        <td><h5>Email</h5></td>
+                        <td><input name="email" type="text" class="form-control"></td>
+                    </tr>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <tr>
+                        <td><h5>Phone Number</h5></td>
+                        <td><input name="pno" type="text" class="form-control"></td>
+                    </tr>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <tr>
+                        <td><h5>Password</h5></td>
+                        <td><input name="pass" type="password" class="form-control"></td>
+                    </tr>
+                  </div>
+
+                </table>
+                <br><br>
+                <center><button name="reg" type="submit" class="btn btn-primary"><h6>Register</h6></button></center>
+                <br>
+                {% if status %}
+                <br>
+                <center><h5 style="color: red;">Email ID Already Exist</h5></center>
+                <br>
+                {% endif %}
+             <br><br>
+                <center><p class="mb-4 pb-lg-2" style="color: #393f81;">Already have an Account &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-info" href="/"
+                    style="color: #393f81;">Login</a></p></center>
+              </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "userbase.html" %}
+{% block content %}
+<section class="vh-100 gradient-custom-3">
+    <div class="container py-4 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img src="https://lh3.googleusercontent.com/lPvDoIP80-OOkD2DcS_XkJ-UzFXcDyqv8xskXBHCdc2hZoUTiHwIqATTTRHft68OAiVYq3myjBdhp2grn70rTWa725n7TztwRrCqpKnDJXXay7XJ-vZMsml2K6ZMB6V1Z3DWSZV-L5-JxDRrz8JnY9Ojh4xeVzsmKbdFAacNRji4oDlGuOykuvLFhE2LXIl8gDzWWX-h6izyYACvrl3cY7ld-bpBIgS7C3zcfrZ80HEiwN_iptzJDlrqa9Cgc1JVopXwJURx1TUsYmSJXdKAZ7FO157GVBkM5LK6bY_9zcg-Xu4jmhhd8xN_l4jglzJ9vNa7U3T8w7yoYPENGEja9F96Pb0fEz8FrUp0WLqIGiyB_3HSfc3sLglyXrUJarbBlOit6mya-k_Tw4GDnP6lKYJu8H2rB_oIOynjg38dfME7e4UIy9UQIjCfYV-O4wJYPVbYXr13pgJ2DzajDVhGXO_E6Pa8f4WmhAmHAjTneIEXFoyDOKWkPSmw55nJ5RZfgvpqN2nCHKuTMx7DhvxNWR50I_2qz3W2o2lhaGJgkWh7oAQh1Hi6jghDpXJvB2UYMao7c1sRrF_fjZehWV_Cifn2jEI7gIxz4OK-JlkBz2yk4VqhJLLfYd9a4AvPIE7n2I88PtfaFNFrtwSlRd6xgqFFHDp_coVnpwG7GvmLFXD1mZkrHl9kybaMVgvcefRmHYzGOKZkqiNITudWLuCHTLKQcpBielMZkLwMkCxwmpR60TJCNQ_f6M6JOicZHvjMnbvzgse0NFA27kQQTpUTHDNMdh7lq7vSIrc=w400-h600-no?authuser=0"
+                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 text-black">
+  
+                  <form action="/forgot" method="post">
+  
+                    <div class="d-flex align-items-center mb-3 pb-1">
+                      <img src="https://lh3.googleusercontent.com/JkyfGbvO88KYP8c2eb9qsmbve5--GELYid-EHFUhXCi7TEsmCGurEQfvbtbOcKq9D1WAyv3PQcm82m9JMD3i37J10dEkMjSwRLFxdM3Mymuiv3ilC3FHI-hTi34NUn9EcPVXmeLsZpJZTw2oWQ1YhsBBsA-avJpgMIpp5U17_JB1Uo7kPoLZrP9R9ALcGlk_Bcnmk3cX9NgGCkmlCqA_s0dUl5GUfOmr9PG0tfjBxUGV2L_rMe5lIGseuI0s34NR25lrKL2VgSdHq4TNdwllV-8O1mt6XrgiVLmOIKZYQ_6Q9jeEM0OkG7vdQquZmlNR3GuPHBPDI6tpvhBXjrMAjRg-G_OU80AAYzIyr0h_drEsqkZfz3zYJrPOmZifRTFGe-Ww8OrTRA3fCNpVFdqmr58SOpkx1CZm25g1PAi4YhlQ8c5dU6rhO-QM58mPfUPYgZTM9vDDmsUgoKlFOsXEOXndYaQgzSs2O2DZ4b02C6ETtBN8ZN4JGhTlFNgeyjI8N1yjq-1y7st_9M-5CQ2mAZW2nlynYoYB-IxYIbQk6WXYV4sAHOA9N3DxtAbnuP4LX_F7PJJDdiZ2jvF-xWUD_6zEfFaFINbwJ6Wo8K5k9vDUYZIdT3wP_Xj_6N_A9TdIZ3zNRLWnnzA1wK02ptvYtGAdOpP7ffdez4KMYVxRAvuGXR3E1THUWnu_VZ0No36GTFkKugShYt9VY8qGDv5Ch3VUtLQlXYVdm7-k9Z9kTnusRXPXNup2aBKySowFc5JIC3dKEp_QhBxfUGmCsgJAX6LH2jRi5bs0R-0=s700-no?authuser=0"
+                       width="60" height="60" alt="">
+                      <span class="h1 fw-bold mb-0">&nbsp;&nbsp;ONESTOP</span>
+                    </div>
+  
+                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Forgot Password? Enter Email Address.</h5>
+  
+                    <div class="form-outline mb-4">
+                      <input type="email" id="form2Example17" name="email" class="form-control form-control-lg" />
+                      <label class="form-label" for="form2Example17">Email address</label>
+                    </div>
+
+                    
+                    <div class="pt-1 mb-4">
+                      <button class="btn btn-dark btn-lg btn-block" type="submit">continue</button>
+                    </div>
+                  </form>
+                    {% if status %}
+                    <form action="/forgot" method="post">
+                    <div class="form-outline mb-4">
+                        <input type="password" id="form2Example27" name="pass" class="form-control form-control-lg" />
+                        <label class="form-label" for="form2Example27">Password</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="password" id="form2Example27" name="cpass" class="form-control form-control-lg" />
+                        <label class="form-label" for="form2Example27">Confirm Password</label>
+                      </div>
+                      <div class="pt-1 mb-4">
+                        <button class="btn btn-dark btn-lg btn-block" type="submit">Change Password</button>
+                      </div>
+                  </form>
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}

@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
+    <style>
+      .background-radial-gradient {
+        background-color: hsl(218, 41%, 15%);
+        background-image: radial-gradient(650px circle at 0% 0%,
+            hsl(218, 41%, 35%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%),
+          radial-gradient(1250px circle at 100% 100%,
+            hsl(218, 41%, 45%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%);
+      }
+  
+      #radius-shape-1 {
+        height: 220px;
+        width: 220px;
+        top: -60px;
+        left: -130px;
+        background: radial-gradient(#44006b, #ad1fff);
+        overflow: hidden;
+      }
+  
+      #radius-shape-2 {
+        border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+        bottom: -60px;
+        right: -110px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(#44006b, #ad1fff);
+        overflow: hidden;
+      }
+  
+      .bg-glass {
+        background-color: hsla(0, 0%, 100%, 0.9) !important;
+        backdrop-filter: saturate(200%) blur(25px);
+      }
+    </style>
+  
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+      <div class="row gx-lg-5 align-items-center mb-5">
+        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+          <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+            We are more than <br />
+            <span style="color: hsl(218, 81%, 75%)">just a company</span>
+          </h1>
+          <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+            Onestop is India’s leading e-commerce marketplace offering over 30 million products cross 70+ categories including Books, Media, Consumer Electronics and Lifestyle.
+                    Onestop is known for its path-breaking services like Cash on Delivery. 
+                    Onestop is the only online player offering services like In-a-Day Guarantee (50 cities) and Same-Day-Guarantee (13 cities) at scale. 
+                    Its annual subscription service, onestop First, is the first of its kind in the country.
+                    Launched in 2017, onestop has become the preferred online marketplace for leading Indian and international brands.
+                    Onestop, currently 33,000 people strong, has 75 million registered users clocking over 10 million daily visits. 
+                    Onestop's technology has enabled it to deliver 8 million shipments per month – and this number is only growing.
+          </p>
+        </div>
+  
+        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+          <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+          <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+  
+          <div class="card bg-glass">
+            <div class="card-body px-4 py-5 px-md-5">
+              <form action="/" method="post">
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row">
+                    <div class="text-center">
+                        <img src="/static/ui/Blue Yellow White Yacht Logo_page-0001(1).png"
+                          style="width: 135px;" alt="logo">
+                          <br>
+                        <h4 class="mt-1 mb-5 pb-1">We are The Onestop Team</h4>
+                      </div>
+  
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input type="email" id="form3Example3" name="email" class="form-control" />
+                  <label class="form-label" for="form3Example3">Email address</label>
+                </div>
+  
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <input type="password" id="form3Example4" name="pass" class="form-control" />
+                  <label class="form-label" for="form3Example4">Password</label>
+                </div>
+  
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">
+                  Login
+                </button>
+
+                <center><a class="text-muted" href="#!">Forgot password?</a></center>
+            <br>
+            <div class="d-flex align-items-center justify-content-center pb-4"></div>
+              <center><p class="mb-0 me-2">Don't have an account?&nbsp;&nbsp;&nbsp;<a href="/userreg">Create New</a></p></center>
+            </div>
+            
+            {% if status %}
+            <br>
+            <center><h5 style="color: red;">Invalid Email ID or Password</h5></center>
+            <br>
+            {% endif %}
+            <br>
+          </form>
+  
+                <!-- Register buttons -->
+                <div class="text-center">
+                  <p>or sign up with:</p>
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+  
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-google"></i>
+                  </button>
+  
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+  
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Section: Design Block -->
+
+
+
+<!-- 
+
+<section class="h-100 gradient-form" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+              <div class="col-lg-6">
+                <div class="card-body p-md-5 mx-md-4">
+  
+                  <div class="text-center">
+                    <img src="https://lh3.googleusercontent.com/Th-MAbU8B4ua24Zt-koF8kAdgrvOM2KTtEvtUYfdYDK4k9kEM0tE5a6t56vhfxMN-fT5jYWXteINmQMdbje1mAqJjbn5Cn87Ms-Ymy7Vws9o9qOtbYN84qhY3wMuJZntYUeWbPvZJtM84Co0zTjHX6uIsq_l21BZonCfQl1q-1jtA_-hDkJNwbSxmTnWxsBFs-R1i7K_-63gAKxNYxtGVV9wHIfaOT1WFWXzk6dvUdbBhLHbrHJLRECHiRxO68n_rVFAaL0xjTKfDDqayN8GQqqIN3hnvs8jxdkhAf7dOA_PPCrgzSmYSZI9u_9nE1S87gyihwRUYAZvq2RQNDjWJOhnQNpZPnXr1-fOhZjSGg3SWDbDWv-QhXLc_RvKJtDb3sf__F3hlR2C7rpf_6m28G2Ufwk7j6fykqbENN6DbT9jXU-dKE63ZZFf1MACEJrgZr4YX31SIrma8NZvr8iCdiQVUocZGTUPAdaze8v5Nko4Gqw9CpbEsUFcxdGPLRh9zha5byEqgHyoGW9AilKqYa0muY2H7hXvwERymQONjWj5JWG4hi7AoO1V-yo9Iru21y8Otl9BkdxiHtJk9SxIaXICUUtmBt2Nk1ToYYeLo1zTqVC4630RrOrPujYgqr_rCDaEsM2RjFOqDIMzxWC1atqn7Y-Rrx67x07vgBbDeyR2sb2JitC-I0tPgWY92aoPM1cs42hS1ohoJ-Oq557uSPOV4tbPk5R0pJmWN9u8xaGza669sb6m92SOiKXmNMnHSDlz5B0OoULkkjKD7APlASX2zP2Z4yHldmI=s700-no?authuser=0"
+                      style="width: 135px;" alt="logo">
+                      <br>
+                    <h4 class="mt-1 mb-5 pb-1">We are The Onestop Team</h4>
+                  </div>
+  
+                  <form action="/sellerlogin" method="post">
+                    <p>Sign into your user account</p>
+  
+                    <div class="form-outline mb-4">
+                      <input type="email" id="form2Example11" class="form-control" name="email"
+                        placeholder="Phone number or email address" />
+                      <label class="form-label" for="form2Example11">Email</label>
+                    </div>
+  
+                    <div class="form-outline mb-4">
+                      <input type="password" id="form2Example22" class="form-control" name="pass" />
+                      <label class="form-label" for="form2Example22">Password</label>
+                    </div>
+  
+                    <div class="text-center pt-1 mb-5 pb-1">
+                      <button class="btn btn-primary btn-block fa-lg gradient-custom mb-3 text-black" type="submit">Log
+                        in</button>
+                      <a class="text-muted" href="#!">Forgot password?</a>
+                    </div>
+  
+                    <div class="d-flex align-items-center justify-content-center pb-4">
+                      <p class="mb-0 me-2">Don't have an account?</p>
+                      <a href="/">Create New</a>
+                    </div>
+                    <br>
+                    {% if status %}
+                    
+                    <center><h5 style="color: red;">Invalid Email ID or Password</h5></center>
+                    
+                    {% endif %}
+                  </form>
+  
+                </div>
+              </div>
+              <div class="col-lg-6 d-flex align-items-center gradient-custom" style="border-radius: 0 1rem 1rem 0 ;">
+                <div class="text-black px-3 py-4 p-md-5 mx-md-4">
+                  <h4 class="mb-4">We are more than just a company</h4>
+                  <p class="small mb-0">Onestop is India’s leading e-commerce marketplace offering over 30 million products cross 70+ categories including Books, Media, Consumer Electronics and Lifestyle.
+                    Onestop is known for its path-breaking services like Cash on Delivery. 
+                    Onestop is the only online player offering services like In-a-Day Guarantee (50 cities) and Same-Day-Guarantee (13 cities) at scale. 
+                    Its annual subscription service, onestop First, is the first of its kind in the country.
+                    Launched in 2017, onestop has become the preferred online marketplace for leading Indian and international brands.
+                    Onestop, currently 33,000 people strong, has 75 million registered users clocking over 10 million daily visits. 
+                    Onestop's technology has enabled it to deliver 8 million shipments per month – and this number is only growing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ -->
+
+
+{% endblock %}

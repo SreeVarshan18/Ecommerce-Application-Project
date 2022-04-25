@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="vh-100 bg-image" style="background-image: url('/static/ui/bg\ image.jpg');">
+    <div class="mask d-flex align-items-center h-150 gradient-custom-3">
+      <div class="container h-150">
+        <div class="row d-flex justify-content-center align-items-center h-150">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <br>
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-1">
+                  <br>
+                <h2 class="text-uppercase text-center mb-5">Seller Registration</h2>
+                <form action="/sellerregister" method="post">
+                <table class="table">
+
+                  <div class="form-outline mb-4">
+                    <tr>
+                        <td><h6>Name</h6></td>
+                        <td><input name="name" type="text" class="form-control"></td>
+                    </tr>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <tr>
+                        <td><h6>Phone Number</h6></td>
+                        <td><input name="pno" type="text" class="form-control"></td>
+                    </tr>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <tr>
+                        <td><h6>Email</h6></td>
+                        <td><input name="email" type="text" class="form-control"></td>
+                    </tr>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <tr>
+                        <td><h6>Password</h6></td>
+                        <td><input name="pass" type="password" class="form-control"></td>
+                    </tr>
+                  </div>
+
+                 <div class="form-outline mb-4">
+                    <tr>
+                        <td><h6>Account Number</h6></td>
+                        <td><input name="ano" type="text" class="form-control"></td>
+                    </tr>
+
+                 </div>
+                 <div class="form-outline mb-4">
+                    <tr>
+                        <td><h6>IFSC Code</h6></td>
+                        <td><input name="ifsc" type="text" class="form-control"></td>
+                    </tr>
+                 </div>
+
+                </table>
+                <div class="d-flex justify-content-center">
+                <center><button type="submit" class="btn btn-primary">Register</button></center>
+                </div>
+                <br>
+                {% if status %}
+                <br>
+                <center><h5 style="color: red;">Email ID Already Exist</h5></center>
+                <br>
+                {% endif %}
+                <center><p class="mb-4 pb-lg-2" style="color: #393f81;">Already have an Account &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-info" href="/sellerlogin"
+                    style="color: #393f81;">Login</a></p></center>
+
+            </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
